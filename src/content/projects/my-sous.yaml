@@ -1,6 +1,7 @@
 name: MySous
 order: 1
 pitch: A kitchen assistant for what goes with what, and why.
+note: 309 Pairings, every one with a source
 links:
   live: https://my-sous.vercel.app
   caseStudy: https://my-sous.vercel.app/case-study

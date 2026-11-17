@@ -1,4 +1,7 @@
 ---
+import { Font } from 'astro:assets'
+import SiteFooter from '../components/SiteFooter.astro'
+import SiteHeader from '../components/SiteHeader.astro'
 import '../styles/global.css'
 
 interface Props {
@@ -16,10 +19,39 @@ const { title, description } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <!-- A theme the Visitor chose, applied before the first paint so the page never flashes the other one. -->
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('theme')
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
+      } catch {
+        // Storage blocked: follow the system.
+      }
+    </script>
+    <Font cssVariable="--font-bricolage" preload />
+    <Font cssVariable="--font-plex" preload={[{ weight: '400', style: 'normal' }]} />
+    <Font cssVariable="--font-caveat" />
   </head>
   <body>
-    <main>
-      <slot />
-    </main>
+    <a
+      href="#main"
+      class="bg-paper sr-only z-10 rounded px-3 py-2 font-semibold focus:not-sr-only focus:absolute focus:top-3 focus:left-3"
+    >
+      Skip to content
+    </a>
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <SiteHeader />
+      <!--
+        The page: a margin column for handwritten notes, a red margin line, then the text. The line starts below the
+        header, so it never runs through the name. On a narrow screen the margin goes, the line moves to the edge,
+        and the notes sit above what they're about.
+      -->
+      <div class="before:bg-margin-line relative grid grid-cols-1 pl-3 before:absolute before:inset-y-0 before:left-0 before:w-0.5 md:grid-cols-[var(--spacing-margin)_minmax(0,1fr)] md:gap-x-8 md:pl-0 md:before:left-[calc(var(--spacing-margin)+0.9rem)]">
+        <main id="main" tabindex="-1" class="col-span-full grid grid-cols-subgrid outline-none">
+          <slot />
+        </main>
+        <SiteFooter />
+      </div>
+    </div>
   </body>
 </html>

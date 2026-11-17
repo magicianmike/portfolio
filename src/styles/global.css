@@ -1,5 +1,97 @@
 @import 'tailwindcss';
 
-/* The theme's tokens (ADR 0002). Milestone 1 fills them in from the chosen visual direction. */
-@theme {
+/*
+ * The theme's tokens (ADR 0002), from the Margins direction (journal 0001): a ruled page with a red margin line, notes
+ * in the margin in a pen's blue. The raw values live here and nowhere else. Light is the default; dark reassigns the
+ * same names, under the system's setting until the Visitor picks one, and under `data-theme` after.
+ */
+:root {
+  --paper: #fdfdfb;
+  --rule: #dbe6f2;
+  --margin-line: #e9a5a5;
+  --text: #24272b;
+  --text-muted: #5d6269;
+  --pen: #2456a6;
+  --edge: #d9dde2;
+  --card: #ffffff;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #1a1d21;
+    --rule: #262d35;
+    --margin-line: #7a3c3c;
+    --text: #e7e5e0;
+    --text-muted: #a6aab0;
+    --pen: #93b6f2;
+    --edge: #363c43;
+    --card: #22262b;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #1a1d21;
+  --rule: #262d35;
+  --margin-line: #7a3c3c;
+  --text: #e7e5e0;
+  --text-muted: #a6aab0;
+  --pen: #93b6f2;
+  --edge: #363c43;
+  --card: #22262b;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-rule: var(--rule);
+  --color-margin-line: var(--margin-line);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-pen: var(--pen);
+  --color-edge: var(--edge);
+  --color-card: var(--card);
+
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-plex);
+  --font-hand: var(--font-caveat);
+
+  /* The ruled lines' pitch, and the margin column's width beside the text. */
+  --spacing-line: 2rem;
+  --spacing-margin: 9rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+
+  /* The page is ruled like a notebook's: a line every 2rem, behind everything. */
+  body {
+    min-height: 100dvh;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--spacing-line) - 1px),
+      var(--color-rule) calc(var(--spacing-line) - 1px) var(--spacing-line)
+    );
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-pen);
+    outline-offset: 3px;
+  }
 }

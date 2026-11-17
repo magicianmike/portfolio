@@ -1,0 +1,24 @@
+---
+import { navigation } from '../navigation'
+import ThemeToggle from './ThemeToggle.astro'
+---
+
+<header class="flex flex-wrap items-center justify-between gap-4 py-6">
+  <a href="/" class="font-display text-xl font-extrabold no-underline">
+    Mikel McCormick
+  </a>
+  <div class="flex items-center gap-5">
+    <nav aria-label="Main">
+      <ul class="m-0 flex list-none gap-5 p-0 font-medium">
+        {navigation.map(({ label, href }) => (
+          <li>
+            <a href={href} class="no-underline hover:underline">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
