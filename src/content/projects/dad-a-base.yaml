@@ -1,0 +1,12 @@
+name: The Dad-a-base
+order: 2
+pitch: >-
+  A dad-joke site on the icanhazdadjoke API, styled as a newspaper's Sunday funnies, with search, Favorites and a
+  press-and-hold Groan button.
+note: Apollo on a REST API, no GraphQL server
+role: Product, design and engineering, built with Claude Code
+stack: [Vue 3, TypeScript, Apollo Client, Pinia, Zod]
+links:
+  live: https://the-dad-a-base.vercel.app
+  caseStudy: https://the-dad-a-base.vercel.app/case-study
+  code: https://github.com/magicianmike/dad-a-base

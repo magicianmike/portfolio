@@ -86,7 +86,9 @@
     text-wrap: balance;
   }
 
+  /* Tailwind's reset takes links' underlines away; a link should look like one, so they come back by default. */
   a {
+    text-decoration-line: underline;
     text-underline-offset: 0.2em;
   }
 

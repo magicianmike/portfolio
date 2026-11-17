@@ -1,7 +1,11 @@
 name: MySous
 order: 1
-pitch: A kitchen assistant for what goes with what, and why.
+pitch: >-
+  A kitchen assistant for what goes with what, and why. Put up to six ingredients in a basket and it suggests the
+  dishes they fit, saying in one line why each part holds what it does.
 note: 309 Pairings, every one with a source
+role: Product, design and engineering, built with Claude Code
+stack: [Next.js 16, React 19, TypeScript, Static export]
 links:
   live: https://my-sous.vercel.app
   caseStudy: https://my-sous.vercel.app/case-study

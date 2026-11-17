@@ -1,0 +1,9 @@
+name: This site
+order: 3
+pitch: >-
+  This portfolio: static HTML from Astro, a design system in Tailwind's tokens, and almost no JavaScript.
+note: the theme toggle is its only script
+role: Design and engineering, built with Claude Code
+stack: [Astro 7, Tailwind v4, TypeScript]
+links:
+  code: https://github.com/magicianmike/portfolio
