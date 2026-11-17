@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '../layouts/Base.astro'
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order)
+---
+
+<Base
+  title="Mikel McCormick"
+  description="Mikel McCormick, product-minded frontend engineer: projects, case studies and how they were made."
+>
+  <h1>Mikel McCormick</h1>
+  <p>Product-minded frontend engineer.</p>
+  <h2>Projects</h2>
+  <ul>
+    {projects.map(({ data }) => (
+      <li>
+        <h3>{data.name}</h3>
+        <p>{data.pitch}</p>
+        <a href={data.links.caseStudy}>{data.name}: Case Study</a>
+      </li>
+    ))}
+  </ul>
+</Base>
