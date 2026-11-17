@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import MarginNote from './MarginNote.astro'
+
+interface Props {
+  project: CollectionEntry<'projects'>
+}
+
+const { name, pitch, note, role, stack, links } = Astro.props.project.data
+// Each link is named by its visible words, then whose it is, so every name on the page is unique.
+const linkList = [
+  { label: 'Live site', href: links.live },
+  { label: 'Case Study', href: links.caseStudy },
+  { label: 'Code', href: links.code },
+].filter((link): link is { label: string; href: string } => !!link.href)
+---
+
+<!-- On a phone the dashed rule goes above the note, so the note opens its Project rather than closing the last. -->
+<div class="border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0">
+  <MarginNote arrow>{note}</MarginNote>
+  <article class="border-edge grid gap-4 pt-3 pb-10 md:col-start-2 md:border-t md:border-dashed md:pt-8">
+    <h3 class="m-0 text-3xl leading-none font-extrabold tracking-tight md:text-4xl">{name}</h3>
+    <p class="m-0 max-w-2xl text-lg leading-relaxed">{pitch}</p>
+    <p class="text-text-muted m-0 text-sm">{role}</p>
+    <ul class="m-0 flex list-none flex-wrap gap-2 p-0" aria-label={`${name}: stack`}>
+      {stack.map((item) => (
+        <li class="border-edge bg-card rounded-sm border px-2 py-0.5 text-sm">{item}</li>
+      ))}
+    </ul>
+    <ul class="m-0 flex list-none flex-wrap gap-x-6 p-0 font-semibold">
+      {linkList.map(({ label, href }) => (
+        <li>
+          <a
+            href={href}
+            aria-label={`${label}: ${name}`}
+            class="decoration-pen inline-flex min-h-11 items-center decoration-2"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </article>
+</div>
