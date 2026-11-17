@@ -97,3 +97,31 @@
     outline-offset: 3px;
   }
 }
+
+/*
+ * A screenshot comes in both themes, and only the one matching the page's shows. Hidden, the other isn't fetched,
+ * since every screenshot but the first on a page loads lazily.
+ */
+@layer components {
+  .shot-dark {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .shot-light {
+      display: none;
+    }
+
+    :root:not([data-theme='light']) .shot-dark {
+      display: block;
+    }
+  }
+
+  :root[data-theme='dark'] .shot-light {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .shot-dark {
+    display: block;
+  }
+}

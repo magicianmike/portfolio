@@ -20,20 +20,16 @@ test('the Projects come from the content collection, in order, each with its Mar
   ])
 })
 
-test('each Project links to its live site, Case Study and code, and only to pages that exist', async ({ page }) => {
+test('each Project card shows its screenshot and links to its Project page', async ({ page }) => {
   await page.goto('/')
-  const link = (name: string) => page.getByRole('link', { name, exact: true })
-  await expect(link('Live site: MySous')).toHaveAttribute('href', 'https://my-sous.vercel.app')
-  await expect(link('Case Study: MySous')).toHaveAttribute('href', 'https://my-sous.vercel.app/case-study')
-  await expect(link('Code: MySous')).toHaveAttribute('href', 'https://github.com/magicianmike/my-sous')
-  await expect(link('Case Study: The Dad-a-base')).toHaveAttribute(
+  await expect(page.getByRole('link', { name: 'Read about MySous' })).toHaveAttribute('href', '/projects/my-sous')
+  await expect(page.getByRole('link', { name: 'The Dad-a-base', exact: true })).toHaveAttribute(
     'href',
-    'https://the-dad-a-base.vercel.app/case-study',
+    '/projects/dad-a-base',
   )
-  await expect(link('Code: This site')).toHaveAttribute('href', 'https://github.com/magicianmike/portfolio')
-  // This site's Case Study arrives in milestone 5, and a Live link to this page would go nowhere.
-  await expect(link('Case Study: This site')).toHaveCount(0)
-  await expect(link('Live site: This site')).toHaveCount(0)
+  await expect(page.getByRole('link', { name: 'Read about This site' })).toHaveAttribute('href', '/projects/this-site')
+  // One screenshot per card shows, the one for the page's theme.
+  await expect(page.getByRole('region', { name: 'Work' }).getByRole('img')).toHaveCount(3)
 })
 
 test('the header names the site and the footer says how to get in touch', async ({ page }) => {

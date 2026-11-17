@@ -4,6 +4,48 @@ pitch: >-
   This portfolio: static HTML from Astro, a design system in Tailwind's tokens, and almost no JavaScript.
 note: the theme toggle is its only script
 role: Design and engineering, built with Claude Code
+problem: >-
+  Two projects that each already have a long Case Study. The portfolio had to summarise and link out rather than
+  retell, let each project's own look come through, and be a sample of the same way of working itself.
+roleDetail: >-
+  I made the design and content calls; Claude Code built each milestone to a spec, with an issue and a pull request,
+  and a preview deploy to review before I merged. The look was chosen from two rounds of prototypes.
 stack: [Astro 7, Tailwind v4, TypeScript]
+hero:
+  light: ../../assets/projects/this-site/hero-light.jpg
+  dark: ../../assets/projects/this-site/hero-dark.jpg
+  alt: >-
+    This site's home page: a ruled page with a red margin line, "hi, I'm Mikel" written in the margin, and the headline
+    "A product-minded frontend engineer who sweats the details."
+highlights:
+  - heading: Chosen from prototypes
+    body: >-
+      Four home-page directions, then four riffs on the one I liked, each in light and dark with the real copy and
+      screenshots. The ruled page with notes in the margin won: it gives the handwriting a job, saying what to look at
+      in each Project.
+    shot:
+      light: ../../assets/projects/this-site/hero-light.jpg
+      dark: ../../assets/projects/this-site/hero-dark.jpg
+      alt: The home page in the chosen direction, with its Margin note beside the headline.
+  - heading: Notes that move to fit
+    body: >-
+      On a wide screen each Margin note sits in the margin beside what it's about. On a phone the margin goes, the red
+      line moves to the edge, and each note opens its section instead.
+    shot:
+      light: ../../assets/projects/this-site/notes-phone-light.jpg
+      dark: ../../assets/projects/this-site/notes-phone-dark.jpg
+      alt: The home page on a phone, with each Margin note above what it's about.
+  - heading: Projects as content
+    body: >-
+      Each Project is one YAML file checked by a Zod schema, so a missing field or a screenshot without alt text fails
+      the build. Every Project page comes from one template, this one included.
+    shot:
+      light: ../../assets/projects/this-site/project-page-light.jpg
+      dark: ../../assets/projects/this-site/project-page-dark.jpg
+      alt: MySous's Project page on this site, built from the same template as this page.
+next:
+  - An About page, with the resume.
+  - This site's own Case Study.
+  - A Lighthouse budget in CI, and a link preview image for every page.
 links:
   code: https://github.com/magicianmike/portfolio
