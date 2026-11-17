@@ -1,0 +1,25 @@
+---
+import { contact } from '../navigation'
+import MarginNote from './MarginNote.astro'
+---
+
+<!-- On a phone the dashed rule goes above the note, so the note opens the footer rather than closing what's above. -->
+<footer class="border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0">
+  <MarginNote>say hello</MarginNote>
+  <div class="border-edge flex flex-col gap-3 pt-3 pb-12 md:col-start-2 md:border-t md:border-dashed md:pt-8">
+    <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 font-medium">
+      <li>
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      </li>
+      <li>
+        <a href={contact.github}>GitHub</a>
+      </li>
+      <li>
+        <a href={contact.linkedin}>LinkedIn</a>
+      </li>
+    </ul>
+    <p class="text-text-muted m-0 text-sm">
+      <a href={contact.code}>The code for this site</a>
+    </p>
+  </div>
+</footer>

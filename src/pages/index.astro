@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
+import MarginNote from '../components/MarginNote.astro'
 import Base from '../layouts/Base.astro'
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order)
@@ -9,16 +10,37 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   title="Mikel McCormick"
   description="Mikel McCormick, product-minded frontend engineer: projects, case studies and how they were made."
 >
-  <h1>Mikel McCormick</h1>
-  <p>Product-minded frontend engineer.</p>
-  <h2>Projects</h2>
-  <ul>
+  <MarginNote arrow>hi, I'm Mikel</MarginNote>
+  <div class="grid max-w-3xl gap-5 pt-6 pb-12 md:col-start-2">
+    <h1 class="m-0 text-5xl leading-[1.02] font-extrabold tracking-tight md:text-7xl">
+      A product-minded frontend engineer who{' '}
+      <span class="decoration-pen underline decoration-wavy decoration-[3px] underline-offset-[0.18em]">
+        sweats the details
+      </span>
+      .
+    </h1>
+    <p class="text-text-muted m-0 max-w-xl text-lg leading-relaxed">
+      Eighteen years between design and engineering. Here's what I've been building lately, with notes in the margin on
+      what to look at.
+    </p>
+  </div>
+
+  <section id="work" aria-labelledby="work-heading" class="col-span-full grid grid-cols-subgrid">
+    <h2 id="work-heading" class="sr-only">
+      Work
+    </h2>
     {projects.map(({ data }) => (
-      <li>
-        <h3>{data.name}</h3>
-        <p>{data.pitch}</p>
-        <a href={data.links.caseStudy}>{data.name}: Case Study</a>
-      </li>
+      // On a phone the dashed rule goes above the note, so the note opens its Project rather than closing the last.
+      <div class="border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0">
+        <MarginNote arrow>{data.note}</MarginNote>
+        <article class="border-edge grid gap-3 pt-3 pb-8 md:col-start-2 md:border-t md:border-dashed md:pt-8">
+          <h3 class="m-0 text-3xl leading-none font-extrabold tracking-tight">{data.name}</h3>
+          <p class="m-0 leading-relaxed">{data.pitch}</p>
+          <a href={data.links.caseStudy} class="decoration-pen font-semibold decoration-2">
+            {data.name}: Case Study
+          </a>
+        </article>
+      </div>
     ))}
-  </ul>
+  </section>
 </Base>

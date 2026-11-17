@@ -13,6 +13,8 @@ const projects = defineCollection({
     /** Where it sits on the home page, smallest first. */
     order: z.number().int(),
     pitch: z.string(),
+    /** The Margin note beside it on the home page: the one thing to look at. */
+    note: z.string(),
     links: z.object({
       live: z.url().optional(),
       caseStudy: z.string(),

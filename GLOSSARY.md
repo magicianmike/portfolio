@@ -6,6 +6,9 @@ One piece of work the portfolio presents: MySous, the Dad-a-base, or This site. 
 **Project card**
 A Project's summary on the home page: its name, pitch, a screenshot and a link to its Project page.
 
+**Margin note**
+A short handwritten note in the page's margin, beside what it's about: on the home page, the one thing to look at in each Project. On a narrow screen it sits above instead.
+
 **Project page**
 A Project's own page at `/projects/<slug>`, built from the one template in the spec.
 

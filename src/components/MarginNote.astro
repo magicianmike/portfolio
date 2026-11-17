@@ -1,0 +1,21 @@
+---
+/**
+ * A handwritten note in the page's margin, beside what it's about. On a narrow screen there's no margin, so it sits
+ * above, flush left. Put it straight inside a `Page`, just before the block it annotates.
+ */
+interface Props {
+  /** An arrow pointing at the block beside it, on a wide screen. */
+  arrow?: boolean
+}
+
+const { arrow = false } = Astro.props
+---
+
+<p class="font-hand text-pen col-start-1 m-0 pt-2 text-xl leading-tight font-bold md:col-start-1 md:-rotate-3 md:pt-1 md:text-right">
+  <slot />
+  {arrow && (
+    <span class="hidden md:block" aria-hidden="true">
+      →
+    </span>
+  )}
+</p>
