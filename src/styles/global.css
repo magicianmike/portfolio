@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+/* The theme's tokens (ADR 0002). Milestone 1 fills them in from the chosen visual direction. */
+@theme {
+}
