@@ -12,7 +12,7 @@ test('the home page says who its author is', async ({ page }) => {
 test('the Projects come from the content collection, in order, each with its Margin note', async ({ page }) => {
   await page.goto('/')
   const work = page.getByRole('region', { name: 'Work' })
-  await expect(work.getByRole('heading', { level: 3 })).toHaveText(['MySous', 'The Dad-a-base', 'This site'])
+  await expect(work.getByRole('heading', { level: 3 })).toHaveText(['MySous', 'The Dad-a-base', 'Portfolio site'])
   await expect(work.getByText('309 Pairings, every one with a source')).toBeVisible()
   await expect(work.getByRole('list', { name: 'The Dad-a-base: stack' }).getByRole('listitem')).toContainText([
     'Vue 3',
@@ -20,7 +20,7 @@ test('the Projects come from the content collection, in order, each with its Mar
   ])
 })
 
-test('each Project card shows its screenshot and links to its Project page, Case Study and live site', async ({
+test('each Project card shows its screenshot and links to its Project page, Case Study, live site and code', async ({
   page,
 }) => {
   await page.goto('/')
@@ -29,7 +29,7 @@ test('each Project card shows its screenshot and links to its Project page, Case
     'href',
     '/projects/dad-a-base',
   )
-  await expect(page.getByRole('link', { name: 'This site', exact: true })).toHaveAttribute(
+  await expect(page.getByRole('link', { name: 'Portfolio site', exact: true })).toHaveAttribute(
     'href',
     '/projects/this-site',
   )
@@ -37,8 +37,16 @@ test('each Project card shows its screenshot and links to its Project page, Case
     'href',
     'https://my-sous.vercel.app/case-study',
   )
-  await expect(page.getByRole('link', { name: 'Case Study: This site' })).toHaveAttribute('href', '/case-study')
-  // Each Project with a live site links to it; This site, which is the page you're on, doesn't.
+  await expect(page.getByRole('link', { name: 'Case Study: Portfolio site' })).toHaveAttribute('href', '/case-study')
+  await expect(page.getByRole('link', { name: 'GitHub: MySous' })).toHaveAttribute(
+    'href',
+    'https://github.com/magicianmike/my-sous',
+  )
+  await expect(page.getByRole('link', { name: 'GitHub: Portfolio site' })).toHaveAttribute(
+    'href',
+    'https://github.com/magicianmike/portfolio',
+  )
+  // Each Project with a live site links to it; the Portfolio site, which is the page you're on, doesn't.
   const work = page.getByRole('region', { name: 'Work' })
   await expect(work.getByRole('link', { name: 'Live site: MySous' })).toHaveAttribute(
     'href',

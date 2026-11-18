@@ -6,7 +6,7 @@ It presents three Projects, each with a page of its own and a link to its full C
 
 - **[MySous](https://mikelmccormick.vercel.app/projects/my-sous):** a kitchen assistant for what goes with what, and why. Next.js and React. ([code](https://github.com/magicianmike/my-sous))
 - **[The Dad-a-base](https://mikelmccormick.vercel.app/projects/dad-a-base):** a dad-joke site styled as the Sunday funnies. Vue and Apollo over REST. ([code](https://github.com/magicianmike/dad-a-base))
-- **[This site](https://mikelmccormick.vercel.app/projects/this-site),** and [how it was made](https://mikelmccormick.vercel.app/case-study).
+- **[The portfolio site](https://mikelmccormick.vercel.app/projects/this-site),** and [how it was made](https://mikelmccormick.vercel.app/case-study).
 
 ## Start here
 

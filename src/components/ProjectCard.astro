@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import Icon from './Icon.astro'
 import MarginNote from './MarginNote.astro'
 import Screenshot from './Screenshot.astro'
 
@@ -9,7 +10,7 @@ interface Props {
 
 const { id, data } = Astro.props.project
 const href = `/projects/${id}`
-// The Project's live site. This site has none: it would only point at the page you're on.
+// The Project's live site. The Portfolio site has none: it would only point at the page you're on.
 const live = data.links.live
 ---
 
@@ -35,8 +36,9 @@ const live = data.links.live
           <a
             href={data.links.caseStudy}
             aria-label={`Case Study: ${data.name}`}
-            class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2"
+            class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
           >
+            <Icon name="case-study" />
             Case Study
           </a>
         )}
@@ -44,11 +46,20 @@ const live = data.links.live
           <a
             href={live}
             aria-label={`Live site: ${data.name}`}
-            class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2"
+            class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
           >
+            <Icon name="live" />
             Live site
           </a>
         )}
+        <a
+          href={data.links.code}
+          aria-label={`GitHub: ${data.name}`}
+          class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
+        >
+          <Icon name="github" />
+          GitHub
+        </a>
       </p>
     </div>
   </article>

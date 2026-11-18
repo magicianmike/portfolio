@@ -39,9 +39,9 @@ test('its links reach the Projects, the code and the decision records', async ({
   }
 })
 
-test('This site links to its Case Study from its card and its Project page', async ({ page }) => {
+test('The Portfolio site links to its Case Study from its card and its Project page', async ({ page }) => {
   await page.goto('/projects/this-site')
-  await expect(page.getByRole('link', { name: 'Case Study: This site' })).toHaveAttribute('href', '/case-study')
+  await expect(page.getByRole('link', { name: 'Case Study: Portfolio site' })).toHaveAttribute('href', '/case-study')
 })
 
 test('every prototype figure is described', async ({ page }) => {

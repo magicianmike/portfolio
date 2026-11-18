@@ -1,6 +1,6 @@
 ---
 import { contact } from '../navigation'
-import ContactIcon from './ContactIcon.astro'
+import Icon from './Icon.astro'
 import MarginNote from './MarginNote.astro'
 ---
 
@@ -11,19 +11,19 @@ import MarginNote from './MarginNote.astro'
     <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0 font-medium">
       <li>
         <a href={`mailto:${contact.email}`} class="inline-flex items-center gap-2">
-          <ContactIcon name="email" />
+          <Icon name="email" />
           {contact.email}
         </a>
       </li>
       <li>
         <a href={contact.github} class="inline-flex items-center gap-2">
-          <ContactIcon name="github" />
+          <Icon name="github" />
           GitHub
         </a>
       </li>
       <li>
         <a href={contact.linkedin} class="inline-flex items-center gap-2">
-          <ContactIcon name="linkedin" />
+          <Icon name="linkedin" />
           LinkedIn
         </a>
       </li>
