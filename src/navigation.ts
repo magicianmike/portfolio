@@ -12,5 +12,4 @@ export const contact = {
   email: 'mjmfxmike@gmail.com',
   github: 'https://github.com/magicianmike',
   linkedin: 'https://www.linkedin.com/in/mikel-mccormick-b054b445/',
-  code: 'https://github.com/magicianmike/portfolio',
 } as const
