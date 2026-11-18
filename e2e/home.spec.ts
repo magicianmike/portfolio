@@ -64,6 +64,12 @@ test('each Project card shows its screenshot and links to its Project page, Case
     'https://the-dad-a-base.mjmfx.com',
   )
   await expect(work.getByRole('link', { name: /^Live site/ })).toHaveCount(2)
+  // Their screenshots open the live site too, in a new tab.
+  const shot = work.getByRole('link', { name: 'MySous, the live site (opens in a new tab)' })
+  await expect(shot).toHaveAttribute('href', 'https://my-sous.mjmfx.com')
+  await expect(shot).toHaveAttribute('target', '_blank')
+  await expect(shot.getByRole('img')).toHaveCount(1)
+  await expect(work.getByRole('link', { name: /the live site/ })).toHaveCount(2)
   // One screenshot per card shows, the one for the page's theme.
   await expect(work.getByRole('img')).toHaveCount(3)
 })

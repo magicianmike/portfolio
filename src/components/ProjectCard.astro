@@ -24,7 +24,25 @@ const shown = links.flatMap(({ href, ...link }) => (href ? [{ ...link, href, new
 <div class="border-divider col-span-full grid grid-cols-subgrid border-t-2 border-dashed md:border-t-0">
   <MarginNote arrow>{data.note}</MarginNote>
   <article class="border-divider grid gap-6 pt-3 pb-16 md:col-start-2 md:border-t-2 md:border-dashed md:pt-8 md:pb-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
-    <Screenshot shot={data.hero} widths={[480, 720, 960]} sizes="(min-width: 64rem) 32rem, 100vw" />
+    {data.links.live ? (
+      // The screenshot opens the live site too. Its name says so, rather than reading out the screenshot's description.
+      <a
+        href={data.links.live}
+        aria-label={`${data.name}, the live site (opens in a new tab)`}
+        target="_blank"
+        rel="noopener"
+        class="group block"
+      >
+        <Screenshot
+          shot={data.hero}
+          widths={[480, 720, 960]}
+          sizes="(min-width: 64rem) 32rem, 100vw"
+          class="transition-shadow group-hover:shadow-md motion-reduce:transition-none"
+        />
+      </a>
+    ) : (
+      <Screenshot shot={data.hero} widths={[480, 720, 960]} sizes="(min-width: 64rem) 32rem, 100vw" />
+    )}
     <div class="grid gap-4">
       <h3 class="m-0 text-3xl leading-none font-extrabold tracking-tight md:text-4xl">
         <a href={href} class="no-underline hover:underline">
