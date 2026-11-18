@@ -16,8 +16,8 @@ I had two projects that each already have a long Case Study inside the app: [MyS
 
 - **Stack:** Astro 7 with static output, Tailwind v4, TypeScript, MDX for this page. MySous is React and the Dad-a-base is Vue, so this one deliberately uses neither.
 - **Content:** each Project is one YAML file, checked by a Zod schema. Every Project page comes from one template.
-- **Weight:** 660 bytes of JavaScript, all of it for the theme. Lighthouse on a phone scores 100 for accessibility and SEO.
-- **Process:** a spec, five decision records, and six milestones so far, each a GitHub issue and a pull request with a preview deploy I reviewed before merging.
+- **Weight:** 660 bytes of the site's own JavaScript, all of it for the theme, plus Vercel's analytics. On a phone, Lighthouse scores 100 for accessibility, best practices and SEO on every page, and CI fails a pull request that drops any of them.
+- **Process:** a spec, five decision records, and seven milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging.
 
 The code is public on GitHub, at [magicianmike/portfolio](https://github.com/magicianmike/portfolio), with the [spec](https://github.com/magicianmike/portfolio/blob/main/docs/spec.md), the [decision records](https://github.com/magicianmike/portfolio/tree/main/docs/adr) and every pull request.
 
@@ -105,23 +105,26 @@ Building it turned up what the prototype hadn't. The margin line ran through my 
 
 <Note>660 bytes</Note>
 
-The site's whole JavaScript is two small inline scripts for the theme: one in the head applies a remembered theme before the first paint, so the page never flashes the wrong one, and one runs the toggle. Together they're 660 bytes, 452 gzipped. There are no framework islands ([ADR 0004](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0004-near-zero-js.md)).
+The site's own JavaScript is two small inline scripts for the theme: one in the head applies a remembered theme before the first paint, so the page never flashes the wrong one, and one runs the toggle. Together they're 660 bytes, 452 gzipped. The only other script is Vercel Web Analytics, which is cookieless, so there's no consent banner. Unlike MySous and the Dad-a-base, which have no analytics, this site's job is to be read by people hiring, and it's worth knowing whether the Case Studies get opened. There are no framework islands ([ADR 0004](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0004-near-zero-js.md)).
 
 Screenshots are the heaviest thing here. `astro:assets` serves each as WebP at the widths the layout needs, and every one but the first on a page loads lazily.
 
-Lighthouse on a phone, against production, before this page was added:
+Lighthouse runs on every pull request, on a phone, three times a page, and CI judges the median run: Accessibility, Best Practices and SEO must be 100 and Performance at least 95, or the pull request fails. The scores when the budget went in:
 
 <Scroll label="Lighthouse scores, on a phone">
 
-| Page      | Performance | Accessibility | Best Practices | SEO |
-| --------- | ----------- | ------------- | -------------- | --- |
-| Home      | 100         | 100           | 96             | 100 |
-| A Project | 99          | 100           | 96             | 100 |
-| About     | 100         | 100           | 96             | 100 |
+| Page                | Performance | Accessibility | Best Practices | SEO |
+| ------------------- | ----------- | ------------- | -------------- | --- |
+| Home                | 100         | 100           | 100            | 100 |
+| About               | 100         | 100           | 100            | 100 |
+| This Case Study     | 100         | 100           | 100            | 100 |
+| Each Project's page | 98          | 100           | 100            | 100 |
 
 </Scroll>
 
-The 4 points on Best Practices are a missing favicon, which arrives with the next milestone. The home page's first run scored 95 on Performance, with 260ms of blocking time on a page with almost nothing to block; three runs after it scored 100 with 0 to 20ms, so I'm reporting the settled number and saying so.
+Getting there took two fixes the budget found. The Project pages first scored 90: each fetched its hero screenshot in both themes, and the display face loaded its whole variable range of weights at 131 KB when the site uses one. Now the light hero loads first at high priority and the dark one only when it shows, and each face loads only the weights the site sets. The stylesheet is inlined, so it doesn't hold up the first paint. Before the budget, production lost 4 points on Best Practices to a missing favicon; it has one now, drawn from the ruled page.
+
+Every page also has its own link preview image, made at build time from the site's fonts and colours: the page's title, a line about it, and its Margin note.
 
 ## Accessibility
 
@@ -154,6 +157,5 @@ The rules say Claude asks before anything outward-facing: every push, issue and 
 
 ## What's next
 
-- A Lighthouse budget in CI, so these numbers can't quietly drop.
-- A link preview image for every page, a sitemap, the favicon, and a 404 page.
-- Vercel Web Analytics: cookieless, to learn whether the Case Studies get read. It'll be the site's second script.
+- More Projects, which the content collection makes one file each.
+- A pass over the copy once the analytics say which pages get read.

@@ -1,0 +1,31 @@
+---
+import MarginNote from '../components/MarginNote.astro'
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="Page not found · Mikel McCormick" description="There's no page at this address.">
+  <MarginNote arrow>torn out</MarginNote>
+  <div class="grid max-w-2xl gap-5 pt-6 pb-16 md:col-start-2">
+    <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">This page isn't in the notebook</h1>
+    <p class="m-0 text-lg leading-relaxed">
+      There's nothing at this address. It may have moved, or the link may have a typo in it.
+    </p>
+    <ul class="m-0 flex list-none flex-wrap gap-x-6 p-0 text-lg font-semibold">
+      <li>
+        <a href="/" class="decoration-pen inline-flex min-h-11 items-center decoration-2">
+          Home page
+        </a>
+      </li>
+      <li>
+        <a href="/#work" class="decoration-pen inline-flex min-h-11 items-center decoration-2">
+          The Projects
+        </a>
+      </li>
+      <li>
+        <a href="/about" class="decoration-pen inline-flex min-h-11 items-center decoration-2">
+          About
+        </a>
+      </li>
+    </ul>
+  </div>
+</Base>

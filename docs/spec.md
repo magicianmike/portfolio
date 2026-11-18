@@ -100,4 +100,4 @@ CI must pass before a merge:
 3. **Project pages:** the template, the screenshot script, and the three Projects' copy.
 4. **About and contact:** the bio, the resume, the PDF and the contact links.
 5. **The Case Study.**
-6. **Polish:** the Lighthouse budget in CI, the README, Open Graph images, the sitemap, `robots.txt`, the favicon set and the 404 page.
+6. **Polish:** the Lighthouse budget in CI, the README, Open Graph images, the sitemap, `robots.txt`, the favicon set, the 404 page, and Vercel Web Analytics.

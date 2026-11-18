@@ -2,7 +2,7 @@ name: This site
 order: 3
 pitch: >-
   This portfolio: static HTML from Astro, a design system in Tailwind's tokens, and almost no JavaScript.
-note: the theme toggle is its only script
+note: 660 bytes of its own JavaScript
 role: Design and engineering, built with Claude Code
 problem: >-
   Two projects that each already have a long Case Study. The portfolio had to summarise and link out rather than
@@ -44,9 +44,8 @@ highlights:
       dark: ../../assets/projects/this-site/project-page-dark.jpg
       alt: MySous's Project page on this site, built from the same template as this page.
 next:
-  - A Lighthouse budget in CI, so the numbers in the Case Study can't quietly drop.
-  - A link preview image for every page, a sitemap, a favicon and a 404 page.
-  - Cookieless analytics, to learn whether the Case Studies get read.
+  - More Projects, one YAML file each.
+  - A pass over the copy once the analytics say which pages get read.
 links:
   caseStudy: /case-study
   code: https://github.com/magicianmike/portfolio
