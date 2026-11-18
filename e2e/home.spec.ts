@@ -37,7 +37,14 @@ test('each Project card shows its screenshot and links to its Project page, Case
     'href',
     'https://my-sous.vercel.app/case-study',
   )
-  await expect(page.getByRole('link', { name: 'Case Study: Portfolio site' })).toHaveAttribute('href', '/case-study')
+  // The Portfolio site's own Case Study opens here; links to other sites open in a new tab.
+  const own = page.getByRole('link', { name: 'Case Study: Portfolio site', exact: true })
+  await expect(own).toHaveAttribute('href', '/case-study')
+  await expect(own).not.toHaveAttribute('target', '_blank')
+  await expect(page.getByRole('link', { name: 'Case Study: MySous (opens in a new tab)' })).toHaveAttribute(
+    'target',
+    '_blank',
+  )
   await expect(page.getByRole('link', { name: 'GitHub: MySous' })).toHaveAttribute(
     'href',
     'https://github.com/magicianmike/my-sous',
