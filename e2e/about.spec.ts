@@ -5,7 +5,7 @@ test('the About page has a bio, the resume and contact, and the navigation marks
   await page.goto('/about')
   await expect(page).toHaveTitle('About · Mikel McCormick')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('About')
-  await expect(page.getByRole('heading', { level: 2 })).toHaveText(['How I work', 'Resume', 'Contact'])
+  await expect(page.getByRole('heading', { level: 2 })).toHaveText(['Outside work', 'How I work', 'Resume', 'Contact'])
   await expect(page.getByRole('heading', { level: 3 })).toHaveText([
     'Impact and projects',
     'Experience',
@@ -16,6 +16,18 @@ test('the About page has a bio, the resume and contact, and the navigation marks
     'aria-current',
     'page',
   )
+})
+
+test('the About page has a photo with a description, and the header a decorative avatar', async ({ page }) => {
+  await page.goto('/about')
+  const photo = page.getByRole('img', {
+    name: 'Mikel McCormick, smiling, with glasses and a beard, against a green wall.',
+  })
+  await expect(photo).toBeVisible()
+  await expect(photo).toHaveJSProperty('complete', true)
+  const avatar = page.getByRole('banner').getByRole('link', { name: 'Mikel McCormick' }).locator('img')
+  await expect(avatar).toHaveAttribute('alt', '')
+  await expect(avatar).toBeVisible()
 })
 
 test('the resume downloads as a PDF', async ({ page, request }) => {

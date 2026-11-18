@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+import headshot from '../assets/about/headshot.jpg'
 import MarginNote from '../components/MarginNote.astro'
 import { resume } from '../data/resume'
 import Base from '../layouts/Base.astro'
@@ -15,19 +17,63 @@ const h3 = 'm-0 text-lg leading-snug font-extrabold'
   description="About Mikel McCormick, a product-minded frontend engineer with 18 years between design and engineering, and his resume."
 >
   <MarginNote arrow>that's me</MarginNote>
-  <header class="grid max-w-2xl gap-5 pt-6 pb-12 md:col-start-2">
-    <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">About</h1>
-    <p class="m-0 text-lg leading-relaxed">
-      I'm a software engineer with 18+ years of experience building web applications, shaping user experiences, and
-      improving the systems behind them. My work spans frontend architecture, UX and UI design, design systems, and
-      AI-powered products.
-    </p>
-    <p class="m-0 text-lg leading-relaxed">
-      I've spent much of my career working between design and engineering. I enjoy taking an early product idea, working
-      through the interaction and technical details, and turning it into software that is useful, maintainable, and good
-      to use.
-    </p>
+  <header class="grid gap-10 pt-6 pb-12 md:col-start-2 lg:grid-cols-[minmax(0,42rem)_16rem] lg:items-start lg:gap-14">
+    <div class="grid gap-5">
+      <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">About</h1>
+      <p class="m-0 text-lg leading-relaxed">
+        I'm a software engineer with 18+ years of experience building web applications, shaping user experiences, and
+        improving the systems behind them. My work spans frontend architecture, UX and UI design, design systems, and
+        AI-powered products.
+      </p>
+      <p class="m-0 text-lg leading-relaxed">
+        I've spent much of my career working between design and engineering. I enjoy taking an early product idea,
+        working through the interaction and technical details, and turning it into software that is useful,
+        maintainable, and good to use.
+      </p>
+    </div>
+    <!-- Taped into the notebook, like a print: beside the introduction, or above it on a narrow screen, by "that's me". -->
+    <figure class="relative order-first m-0 mt-3 w-48 rotate-2 justify-self-start md:w-64 lg:order-none lg:mt-4 lg:justify-self-end">
+      <span
+        class="bg-tape absolute -top-3 left-1/2 h-7 w-24 -translate-x-1/2 -rotate-3 opacity-80 shadow-sm"
+        aria-hidden="true"
+      ></span>
+      <div class="border-edge bg-card rounded-sm border p-2.5 pb-3 shadow-md">
+        <Image
+          src={headshot}
+          alt="Mikel McCormick, smiling, with glasses and a beard, against a green wall."
+          width={256}
+          widths={[224, 256, 448, 512]}
+          sizes="(min-width: 48rem) 15rem, 11rem"
+          loading="eager"
+          fetchpriority="high"
+          class="block h-auto w-full"
+        />
+      </div>
+    </figure>
   </header>
+
+  <section class={section} aria-labelledby="outside-work">
+    <MarginNote>off the clock</MarginNote>
+    <div class={body}>
+      <h2 id="outside-work" class={h2}>
+        Outside work
+      </h2>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        Most of my life outside work happens at home, with my wife, Brittany, of five years, Hank, our two-year-old
+        Bernese Mountain Dog, Oakley, a six-month-old golden retriever, and our four cats.
+      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        I like making things with my hands, and furniture is my favorite thing to build. Around the house, I like custom
+        carpentry and built-ins, trim work and electrical best, and some of my favorite projects have been for the
+        animals: a 10-foot sandbox for the dogs and a custom catio for the cats. I'm also a foodie and a passionate home
+        chef, and my favorites to cook are Mexican, Chinese and Japanese.
+      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        Photography is an art for me, and landscapes are my favorite subject. I also make mixed-media art, combining
+        illustration with pens, markers, watercolor and acrylic, and I dabble in stencil art.
+      </p>
+    </div>
+  </section>
 
   <section class={section} aria-labelledby="how-i-work">
     <MarginNote>how I work</MarginNote>
