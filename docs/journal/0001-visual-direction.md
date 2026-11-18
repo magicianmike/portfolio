@@ -57,6 +57,6 @@ The author picked **C1 · Margins**. It keeps C's handwriting but gives it a pla
 - `src/styles/tokens.test.ts` (`npm test`, Node's own test runner, which runs TypeScript as it is): text, muted text and the pen on paper and on card are at least 4.5:1 in both themes, read from the tokens themselves; and the system's dark theme matches the toggle's.
 - Playwright, in Chromium and iPhone WebKit: the header and footer links; the theme follows the system until chosen; a choice is remembered and applied before any module script runs; the skip link moves focus to the content (Chromium only, as iOS has no Tab key); axe in both themes, after the fonts load.
 
-## Not done yet
+## VoiceOver
 
-- **VoiceOver:** the author's pass on a Mac and an iPhone, before merging.
+The author's pass on a Mac and an iPhone found nothing to fix. It ran on production on 18 November 2026, after milestone 6, rather than before this milestone merged as planned.
