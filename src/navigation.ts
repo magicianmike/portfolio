@@ -2,6 +2,7 @@
 export const navigation = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/about' },
+  { label: 'Case study', href: '/case-study' },
 ] as const
 
 export const contact = {

@@ -1,0 +1,28 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+/** Prototype screenshots side by side, each cropped to its first screen, with a caption under each. */
+interface Props {
+  images: { src: ImageMetadata; alt: string; caption: string }[]
+}
+
+const { images } = Astro.props
+---
+
+<div class="not-prose my-8 grid gap-6 sm:grid-cols-2">
+  {images.map(({ src, alt, caption }) => (
+    <figure class="m-0 grid gap-2">
+      <div class="border-edge bg-card overflow-hidden rounded-sm border shadow-sm">
+        <Image
+          src={src}
+          alt={alt}
+          widths={[400, 640, 800]}
+          sizes="(min-width: 40rem) 22rem, 100vw"
+          class="aspect-[16/10] w-full object-cover object-top"
+        />
+      </div>
+      <figcaption class="text-text-muted text-sm leading-snug">{caption}</figcaption>
+    </figure>
+  ))}
+</div>

@@ -1,0 +1,15 @@
+---
+/**
+ * Something wider than a phone, like a table, scrolling sideways inside itself so the page never does. It can take
+ * focus, so a keyboard can scroll it too, and it's a named region so a screen reader says what's in it.
+ */
+interface Props {
+  label: string
+}
+
+const { label } = Astro.props
+---
+
+<div class="mb-6 overflow-x-auto" tabindex="0" role="region" aria-label={label}>
+  <slot />
+</div>
