@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import headshot from '../assets/about/headshot.jpg'
+import ContactIcon from '../components/ContactIcon.astro'
 import MarginNote from '../components/MarginNote.astro'
 import { resume } from '../data/resume'
 import Base from '../layouts/Base.astro'
@@ -124,14 +125,21 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
         Contact
       </h2>
       <ul class="m-0 grid list-none gap-2 p-0 text-lg">
-        <li>
-          Email: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <!-- The icon names the service to the eye; the hidden label names it to a screen reader. -->
+        <li class="flex items-center gap-3">
+          <ContactIcon name="email" class="text-text-muted" />
+          <span class="sr-only">Email:</span>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </li>
-        <li>
-          LinkedIn: <a href={contact.linkedin}>mikel-mccormick-b054b445</a>
+        <li class="flex items-center gap-3">
+          <ContactIcon name="linkedin" class="text-text-muted" />
+          <span class="sr-only">LinkedIn:</span>
+          <a href={contact.linkedin}>mikel-mccormick-b054b445</a>
         </li>
-        <li>
-          GitHub: <a href={contact.github}>magicianmike</a>
+        <li class="flex items-center gap-3">
+          <ContactIcon name="github" class="text-text-muted" />
+          <span class="sr-only">GitHub:</span>
+          <a href={contact.github}>magicianmike</a>
         </li>
       </ul>
     </div>
