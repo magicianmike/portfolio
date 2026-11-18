@@ -17,7 +17,7 @@ export const getStaticPaths = (async () => {
     about: {
       note: "that's me",
       title: 'About',
-      line: '18 years between design and engineering, and life outside work.',
+      line: '18 years between design and engineering, and life outside of work.',
     },
     resume: {
       note: 'the resume',
