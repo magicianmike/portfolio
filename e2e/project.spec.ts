@@ -51,7 +51,11 @@ for (const project of projects) {
     await expect(images).toHaveCount(4)
     for (const image of await images.all()) {
       expect(await image.getAttribute('alt')).toMatch(/\w{3,}/)
-      expect(await image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true)
+      // Lazy images load once near the screen, so bring each there and wait for it, rather than checking once.
+      await image.scrollIntoViewIfNeeded()
+      await expect
+        .poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0))
+        .toBe(true)
     }
   })
 
