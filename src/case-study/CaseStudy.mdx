@@ -35,7 +35,7 @@ Styling is Tailwind v4, another way to keep a design consistent after the Dad-a-
 
 Each Project is a YAML file in an Astro content collection: its name, pitch, the Margin note beside it on the home page, the problem, my role, the stack, three Highlights, what's next and its links. A Zod schema checks every file at build time, so a missing field, a misspelt one, or a screenshot without alt text fails the build rather than the page ([ADR 0003](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0003-projects-as-content.md)). Exactly three Highlights are required, so every Project page has the same shape and they're easy to compare.
 
-The links are only to pages that exist. Until this page was written, This site's Case Study link was left out, and its Project page has no "Live site" link because it would only point at this site.
+The links are only to pages that exist. Until this page was written, the Portfolio site's Case Study link was left out, and its Project page has no "Live site" link because it would only point at this site.
 
 Screenshots come from a script, not by hand. `npm run screenshots` opens each live app in Playwright at desktop or phone size, scrolls to what each Highlight is about, and captures it in light and dark. The page shows the one that matches its theme, and the other is never fetched. When MySous's lime page turned out to carry a "Placeholder image" tag, its Highlight moved to basil; the script made that a one-line change.
 

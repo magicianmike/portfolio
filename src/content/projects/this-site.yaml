@@ -1,4 +1,4 @@
-name: This site
+name: Portfolio site
 order: 3
 pitch: >-
   This portfolio: static HTML from Astro, a design system in Tailwind's tokens, and almost no JavaScript.
@@ -15,7 +15,7 @@ hero:
   light: ../../assets/projects/this-site/hero-light.jpg
   dark: ../../assets/projects/this-site/hero-dark.jpg
   alt: >-
-    This site's home page: a ruled page with a red margin line, "hi, I'm Mikel" written in the margin, and the headline
+    The portfolio site's home page: a ruled page with a red margin line, "hi, I'm Mikel" written in the margin, and the headline
     "A product-minded frontend engineer who sweats the details."
 highlights:
   - heading: Chosen from prototypes

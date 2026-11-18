@@ -26,8 +26,8 @@ const linkList = [
   { label: 'Code', href: links.code },
 ].filter((link): link is { label: string; href: string } => !!link.href)
 
-const section = 'border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0'
-const body = 'border-edge grid gap-4 pt-3 pb-10 md:col-start-2 md:border-t md:border-dashed md:pt-8'
+const section = 'border-divider col-span-full grid grid-cols-subgrid border-t-2 border-dashed md:border-t-0'
+const body = 'border-divider grid gap-4 pt-3 pb-10 md:col-start-2 md:border-t-2 md:border-dashed md:pt-8'
 const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl'
 ---
 

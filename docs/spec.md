@@ -10,14 +10,14 @@ Mikel McCormick's portfolio, a small static site that presents his projects to h
 
 ## Pages
 
-| Path               | What it is                                                                                                                   |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `/`                | The hero (name, positioning, one sentence), then a Project card each for MySous, the Dad-a-base and This site, in that order |
-| `/projects/<slug>` | A Project page, from one template (below)                                                                                    |
-| `/case-study`      | This site's own Case Study, in MDX                                                                                           |
-| `/about`           | A photo, a short bio, life outside work, and links to the resume and its PDF                                                 |
-| `/resume`          | The resume as HTML, laid out as `resume.html` is, and a PDF download                                                         |
-| 404                | A styled not-found page linking home                                                                                         |
+| Path               | What it is                                                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                | The hero (name, positioning, one sentence), then a Project card each for MySous, the Dad-a-base and the Portfolio site, in that order |
+| `/projects/<slug>` | A Project page, from one template (below)                                                                                             |
+| `/case-study`      | The Portfolio site's own Case Study, in MDX, reached from its card and Project page                                                   |
+| `/about`           | A photo, a short bio, life outside of work, and links to the resume and its PDF                                                       |
+| `/resume`          | The resume as HTML, laid out as `resume.html` is, and a PDF download                                                                  |
+| 404                | A styled not-found page linking home                                                                                                  |
 
 Every page has the same header (name, navigation, theme toggle) and footer (contact links, the code, the Case Study).
 
@@ -32,7 +32,7 @@ Every Project page has the same sections, in this order, so Projects are easy to
 5. **What's next.**
 6. **Links:** Live, Case Study, Code.
 
-"This site" is a Project too: its Case Study link goes to `/case-study`, and its Live link is the home page.
+"Portfolio site" is a Project too: its Case Study link goes to `/case-study`, and its Live link is the home page.
 
 ### The Projects
 
@@ -40,7 +40,7 @@ Every Project page has the same sections, in this order, so Projects are easy to
 | -------------- | ----------------------------------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------- |
 | MySous         | <https://my-sous.vercel.app>        | <https://my-sous.vercel.app/case-study>        | <https://github.com/magicianmike/my-sous>    | Next.js 16 static export, React 19 |
 | The Dad-a-base | <https://the-dad-a-base.vercel.app> | <https://the-dad-a-base.vercel.app/case-study> | <https://github.com/magicianmike/dad-a-base> | Vue 3, Apollo over REST, Pinia     |
-| This site      | the home page                       | `/case-study`                                  | <https://github.com/magicianmike/portfolio>  | Astro, Tailwind v4                 |
+| Portfolio site | the home page                       | `/case-study`                                  | <https://github.com/magicianmike/portfolio>  | Astro, Tailwind v4                 |
 
 The Dad-a-base's live deploy comes from the repository it was first built in, so its Case Study is framed slightly differently from the public copy of its code. That's accepted for now and revisited later.
 
@@ -56,7 +56,7 @@ Links only, with no form and no backend: email (`mailto:mjmfxmike@gmail.com`), [
 
 A short bio on `/about`, and the resume on `/resume`, in the main navigation. The resume is copied word for word from `resume.html` in the `resume` repo and kept up to date by hand, with its PDF to download. Its page keeps `resume.html`'s layout, on a sheet taped into the notebook, lifted off the page by a shadow: the black bar, the uppercase name, the spaced-out section labels, the striped rows and the three-column footer. It uses the site's fonts, and the sheet has tokens of its own after `resume.html`'s greys, with the lightest darkened to pass 4.5:1, and a dark sheet in the dark theme.
 
-The author's photo, taped into the page beside the bio, and a section on life outside work: the author's family (their wife, Brittany, two dogs, Hank and Oakley, and four cats), woodworking, home renovation, cooking, photography and mixed-media art. The same photo is a small avatar beside the name in every page's header, where it's decorative. The photo's metadata is stripped before it's committed. Brittany's first name and the dogs' names are in by the author's choice, and nothing more about them; no photos but the author's, and nothing that places the author more closely than the town already on the site.
+The author's photo, taped into the page beside the bio, and a section on life outside of work: the author's family (their wife, Brittany, two dogs, Hank and Oakley, and four cats), woodworking, home renovation, cooking, photography and mixed-media art. The same photo is a small avatar beside the name in every page's header, where it's decorative. The photo's metadata is stripped before it's committed. Brittany's first name and the dogs' names are in by the author's choice, and nothing more about them; no photos but the author's, and nothing that places the author more closely than the town already on the site.
 
 ## Look
 
@@ -86,7 +86,7 @@ CI must pass before a merge:
 
 ## The Case Study
 
-`/case-study`, in MDX, in the same voice as the other two: why Astro, the content model, performance and the Lighthouse numbers, accessibility, and building with Claude. It's linked from the home page as This site's card, and from the footer.
+`/case-study`, in MDX, in the same voice as the other two: why Astro, the content model, performance and the Lighthouse numbers, accessibility, and building with Claude. It's linked from the Portfolio site's card on the home page and from its Project page, not from the main navigation.
 
 ## Process
 
@@ -104,5 +104,5 @@ CI must pass before a merge:
 4. **About and contact:** the bio, the resume, the PDF and the contact links.
 5. **The Case Study.**
 6. **Polish:** the Lighthouse budget in CI, the README, Open Graph images, the sitemap, `robots.txt`, the favicon set, the 404 page, and Vercel Web Analytics.
-7. **Bio and photo:** the photo on About and as the header's avatar, and the Outside work section.
+7. **Bio and photo:** the photo on About and as the header's avatar, and the Outside of work section.
 8. **Resume page:** the resume on `/resume`, laid out as `resume.html` is, and a new photo.

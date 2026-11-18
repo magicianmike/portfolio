@@ -6,35 +6,53 @@
  */
 ---
 
+<!-- The Dad-a-base's switch: both choices show, and the thumb sits behind the one in use. -->
 <button
   type="button"
-  class="theme-toggle grid size-11 cursor-pointer place-items-center rounded-full border border-current bg-transparent text-current"
+  class="theme-toggle text-text-muted hover:text-text inline-grid min-h-11 min-w-11 cursor-pointer place-items-center border-0 bg-transparent p-0"
   aria-pressed="false"
   hidden
 >
   <span class="sr-only">Dark theme</span>
-  <svg
-    class="size-5"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    aria-hidden="true"
-  >
-    <path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path>
-    <g class="sun">
+  <span class="relative flex gap-1 rounded-full border-2 border-current p-1" aria-hidden="true">
+    <span class="thumb bg-text absolute top-1 left-1 size-6 rounded-full"></span>
+    <svg class="icon sun relative size-6 p-1" viewBox="0 0 24 24" focusable="false">
       <circle cx="12" cy="12" r="4"></circle>
-      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-    </g>
-  </svg>
+      <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"></path>
+    </svg>
+    <svg class="icon moon relative size-6 p-1" viewBox="0 0 24 24" focusable="false">
+      <path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"></path>
+    </svg>
+  </span>
 </button>
 
 <style>
-  /* The icon shows what pressing it gives: a moon to go dark, a sun to go light. */
-  .theme-toggle[aria-pressed='true'] .moon,
-  .theme-toggle[aria-pressed='false'] .sun {
-    display: none;
+  .icon {
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .thumb {
+    transition: transform 150ms ease;
+  }
+
+  /* Pressed is dark: the thumb moves to the moon. The icon on the thumb takes the page's colour. */
+  .theme-toggle[aria-pressed='true'] .thumb {
+    transform: translateX(1.75rem);
+  }
+
+  .theme-toggle[aria-pressed='false'] .sun,
+  .theme-toggle[aria-pressed='true'] .moon {
+    stroke: var(--color-paper);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thumb {
+      transition: none;
+    }
   }
 </style>
 
