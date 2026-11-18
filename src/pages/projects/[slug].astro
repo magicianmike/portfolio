@@ -1,0 +1,132 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import MarginNote from '../../components/MarginNote.astro'
+import Screenshot from '../../components/Screenshot.astro'
+import Base from '../../layouts/Base.astro'
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }))
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>
+}
+
+/*
+ * The Project page template: every Project has the same sections in the same order (the spec), each opened by a
+ * Margin note naming it, so Projects are easy to compare.
+ */
+const { name, pitch, hero, problem, roleDetail, role, stack, highlights, next, links } = Astro.props.project.data
+
+// Each link's name starts with its visible words, then says whose it is.
+const linkList = [
+  { label: 'Live site', href: links.live },
+  { label: 'Case Study', href: links.caseStudy },
+  { label: 'Code', href: links.code },
+].filter((link): link is { label: string; href: string } => !!link.href)
+
+const section = 'border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0'
+const body = 'border-edge grid gap-4 pt-3 pb-10 md:col-start-2 md:border-t md:border-dashed md:pt-8'
+const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl'
+---
+
+<Base title={`${name} · Mikel McCormick`} description={pitch}>
+  <MarginNote arrow>a Project</MarginNote>
+  <header class="grid gap-6 pt-6 pb-12 md:col-start-2">
+    <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">{name}</h1>
+    <p class="text-text-muted m-0 max-w-2xl text-xl leading-relaxed">{pitch}</p>
+    <Screenshot shot={hero} widths={[640, 960, 1280, 1600]} sizes="(min-width: 72rem) 52rem, 100vw" eager />
+  </header>
+
+  <section class={section} aria-labelledby="problem">
+    <MarginNote>the problem</MarginNote>
+    <div class={body}>
+      <h2 id="problem" class={h2}>
+        The problem, and my role
+      </h2>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">{problem}</p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        <strong>{role}.</strong> {roleDetail}
+      </p>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="stack">
+    <MarginNote>built with</MarginNote>
+    <div class={body}>
+      <h2 id="stack" class={h2}>
+        Stack
+      </h2>
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {stack.map((item) => (
+          <li class="border-edge bg-card rounded-sm border px-2.5 py-1">{item}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="highlights">
+    <MarginNote>look at</MarginNote>
+    <div class={body}>
+      <h2 id="highlights" class={h2}>
+        Highlights
+      </h2>
+      <ol class="m-0 grid list-none gap-12 p-0">
+        {highlights.map(({ heading, body: text, shot }) => (
+          <li class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-start lg:gap-8">
+            <div class="grid gap-3">
+              <h3 class="m-0 text-xl leading-snug font-extrabold">{heading}</h3>
+              <p class="m-0 leading-relaxed">{text}</p>
+            </div>
+            <Screenshot
+              shot={shot}
+              widths={[480, 720, 960, 1280]}
+              sizes="(min-width: 64rem) 30rem, 100vw"
+              class="max-lg:max-w-2xl"
+            />
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="next">
+    <MarginNote>next</MarginNote>
+    <div class={body}>
+      <h2 id="next" class={h2}>
+        What's next
+      </h2>
+      <ul class="m-0 grid max-w-2xl gap-2 pl-5 leading-relaxed">
+        {next.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="links">
+    <MarginNote>go see</MarginNote>
+    <div class={body}>
+      <h2 id="links" class={h2}>
+        Links
+      </h2>
+      <ul class="m-0 flex list-none flex-wrap gap-x-6 p-0 text-lg font-semibold">
+        {linkList.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              aria-label={`${label}: ${name}`}
+              class="decoration-pen inline-flex min-h-11 items-center decoration-2"
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="m-0">
+        <a href="/#work">All Projects</a>
+      </p>
+    </div>
+  </section>
+</Base>

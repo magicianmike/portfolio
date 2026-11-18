@@ -5,7 +5,61 @@ pitch: >-
   dishes they fit, saying in one line why each part holds what it does.
 note: 309 Pairings, every one with a source
 role: Product, design and engineering, built with Claude Code
+problem: >-
+  A home cook at 6pm stands at the open fridge with half a bunch of cilantro, some chicken thighs and a lime. They can
+  follow a recipe, but they don't trust themselves to improvise. Recipe sites match keywords, and chat assistants
+  answer with confident text no one can check. Neither explains what goes with what, and why.
+roleDetail: >-
+  I made the product, design and content decisions, and Claude Code wrote the code and its tests, through a fixed loop
+  of skills: a spec and a ticket, tests first, review, and a journal entry for each change. Nothing shipped until I
+  said so.
 stack: [Next.js 16, React 19, TypeScript, Static export]
+hero:
+  light: ../../assets/projects/my-sous/hero-light.jpg
+  dark: ../../assets/projects/my-sous/hero-dark.jpg
+  alt: >-
+    The MySous home page, headed "Find what goes with what, and why.", with three steps: find an ingredient, fill your
+    basket, and see what to make.
+highlights:
+  - heading: A dish arrives filled in, and says why
+    body: >-
+      MySous fills each part of a dish from the basket first, then with the Ingredient that pairs best with the rest,
+      and every fill carries one line saying why it's there. A part no Pairing can justify stays open and says so,
+      rather than being filled with something that merely fits.
+    shot:
+      light: ../../assets/projects/my-sous/filled-in-light.jpg
+      dark: ../../assets/projects/my-sous/filled-in-dark.jpg
+      alt: >-
+        A pan sauce suggestion for a basket of chicken thigh and garlic, marked "Needs 1 more", saying it also needs an
+        acid, that lemon pairs best, and where chicken thigh and garlic are common together.
+  - heading: Sourced, by rule
+    body: >-
+      Every Pairing cites at least one source with a link, from cooks and writers in each tradition, culinary
+      institutions and official bodies. There's no model in the app, so every claim can be checked, and the build
+      refuses content that breaks the rules.
+    shot:
+      light: ../../assets/projects/my-sous/sourced-light.jpg
+      dark: ../../assets/projects/my-sous/sourced-dark.jpg
+      alt: >-
+        The basil page: a photo of basil, common in Southern Italian and Ligurian cooking, and what pairs well with it,
+        such as tomato and garlic, each with a one-line reason.
+  - heading: Any basket is a link
+    body: >-
+      The basket lives in the address, so Back and Forward step through changes and a shared link reopens the same
+      basket. On a phone the basket is a bar at the foot of the screen with a row of its own, so it never covers the
+      control you're on.
+    shot:
+      light: ../../assets/projects/my-sous/basket-phone-light.jpg
+      dark: ../../assets/projects/my-sous/basket-phone-dark.jpg
+      alt: >-
+        MySous on a phone: What to make, with chicken thigh, garlic and lemon in the basket and more ingredients to
+        add.
+next:
+  - >-
+    Rescue: guided help when something goes wrong mid-cook, like a split sauce or too much salt. It's where a language
+    model might earn a place.
+  - Content toward 100 Ingredients, in sourced batches, with each Recipe cooked before it ships.
+  - Shareable dishes, with a dish's changes in its address as well as its basket.
 links:
   live: https://my-sous.vercel.app
   caseStudy: https://my-sous.vercel.app/case-study

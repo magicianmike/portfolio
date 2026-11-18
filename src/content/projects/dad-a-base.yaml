@@ -5,7 +5,60 @@ pitch: >-
   press-and-hold Groan button.
 note: Apollo on a REST API, no GraphQL server
 role: Product, design and engineering, built with Claude Code
+problem: >-
+  A small, familiar problem: a site on the icanhazdadjoke API with search, a random joke and a page for each joke. I
+  wanted a piece that showed depth in Vue and Apollo, and that treated each of those basics as a goal rather than a
+  checklist.
+roleDetail: >-
+  I made the product and design calls and reviewed every change; Claude Code built each milestone to the spec and
+  recorded its own defaults. Nine milestones and five follow-ups, each with an issue, a pull request and a journal
+  entry, and a VoiceOver pass I ran myself on a Mac and an iPhone.
 stack: [Vue 3, TypeScript, Apollo Client, Pinia, Zod]
+hero:
+  light: ../../assets/projects/dad-a-base/hero-light.jpg
+  dark: ../../assets/projects/dad-a-base/hero-dark.jpg
+  alt: >-
+    The Dad-a-base front page: a newspaper masthead, "Local dad says the thing again" as the day's top story, and a
+    joke in a comic frame with Another, Fave and Groan buttons.
+highlights:
+  - heading: Apollo over a REST API
+    body: >-
+      icanhazdadjoke's own GraphQL endpoint has no search list or pagination, so every request is a GraphQL document
+      with an @rest directive that apollo-link-rest turns into a REST call. Zod checks every response and is the single
+      source of the API's types, and each Joke is cached once, so opening a search result needs no request.
+    shot:
+      light: ../../assets/projects/dad-a-base/search-light.jpg
+      dark: ../../assets/projects/dad-a-base/search-dark.jpg
+      alt: Search the archives, for "cat", showing jokes 1 to 10 of 11.
+  - heading: An Error state for every way it can fail
+    body: >-
+      The API reports a missing joke as HTTP 200 with a 404 in the body, so every response is parsed in one place and
+      mapped to one of six codes. Each has its own page in the paper's voice, shown in place, so the address and "Try
+      again" still work.
+    shot:
+      light: ../../assets/projects/dad-a-base/error-light.jpg
+      dark: ../../assets/projects/dad-a-base/error-dark.jpg
+      alt: >-
+        The error page for too many requests: "Easy, tiger. Even Dad needs a breather.", with Try again, Front page and
+        A random joke.
+  - heading: A Case Study with the app inside it
+    body: >-
+      The Case Study is a page on the same site, written in MDX, with the app's own components live beside the
+      decisions they show, in fixed states, rather than screenshots. That needs every component to render from its
+      props alone, which is itself a test of the architecture.
+    shot:
+      light: ../../assets/projects/dad-a-base/case-study-light.jpg
+      dark: ../../assets/projects/dad-a-base/case-study-dark.jpg
+      alt: >-
+        The Case Study's live figure of a button in both themes at once, above its section on the testing approach,
+        with the chapters listed beside it.
+next:
+  - >-
+    A link preview for each joke. That needs a server to render each one's Open Graph image, which the static site
+    doesn't have.
+  - >-
+    Favorites and Groans that follow you between devices. That needs accounts, and a new decision record replacing the
+    one that keeps them in the browser.
 links:
   live: https://the-dad-a-base.vercel.app
   caseStudy: https://the-dad-a-base.vercel.app/case-study

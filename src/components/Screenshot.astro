@@ -1,0 +1,30 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+interface Props {
+  shot: { light: ImageMetadata; dark: ImageMetadata; alt: string }
+  /** The rendered widths it's served at, for the browser to choose from. */
+  widths: number[]
+  sizes: string
+  /** The page's main image: loaded at once, not lazily. */
+  eager?: boolean
+  class?: string
+}
+
+const { shot, widths, sizes, eager = false, class: className } = Astro.props
+const loading = eager ? 'eager' : 'lazy'
+// A phone's screenshot is tall: shown at a phone's width, not stretched to the column.
+const portrait = shot.light.height > shot.light.width
+---
+
+<div
+  class:list={[
+    'border-edge bg-card overflow-hidden rounded-sm border shadow-sm',
+    portrait && 'w-full max-w-72',
+    className,
+  ]}
+>
+  <Image src={shot.light} alt={shot.alt} widths={widths} sizes={sizes} loading={loading} class="shot-light w-full" />
+  <Image src={shot.dark} alt={shot.alt} widths={widths} sizes={sizes} loading={loading} class="shot-dark w-full" />
+</div>
