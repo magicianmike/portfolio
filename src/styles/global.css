@@ -14,6 +14,7 @@
   --text-muted: #5d6269;
   --pen: #2456a6;
   --edge: #d9dde2;
+  --divider: #a9b1bb;
   --card: #ffffff;
   --tape: #eee2ad;
   /* The resume's sheet, after `resume.html`'s zinc greys, with its lightest darkened to pass 4.5:1. */
@@ -40,6 +41,7 @@
     --text-muted: #a6aab0;
     --pen: #93b6f2;
     --edge: #363c43;
+    --divider: #59616b;
     --card: #22262b;
     --tape: #5e5741;
     --sheet: #202023;
@@ -64,6 +66,7 @@
   --text-muted: #a6aab0;
   --pen: #93b6f2;
   --edge: #363c43;
+  --divider: #59616b;
   --card: #22262b;
   --tape: #5e5741;
   --sheet: #202023;
@@ -87,6 +90,8 @@
   --color-text-muted: var(--text-muted);
   --color-pen: var(--pen);
   --color-edge: var(--edge);
+  /* The dashed rules between sections. */
+  --color-divider: var(--divider);
   --color-card: var(--card);
   --color-tape: var(--tape);
   --color-sheet: var(--sheet);
