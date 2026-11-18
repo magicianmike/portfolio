@@ -39,10 +39,10 @@ function token(tokens: Record<string, string>, name: string) {
   return value
 }
 
-/** Each set of text colours and the surfaces it sits on: the notebook's, and the resume sheet's. */
+/** Each set of text colours and the surfaces it sits on: the notebook's, and the resume's, which sits on the page with striped rows. */
 const PAIRS = [
   { text: ['text', 'text-muted', 'pen'], surfaces: ['paper', 'card'] },
-  { text: ['sheet-ink', 'sheet-body', 'sheet-muted', 'sheet-faint'], surfaces: ['sheet', 'sheet-alt'] },
+  { text: ['sheet-ink', 'sheet-body', 'sheet-muted', 'sheet-faint'], surfaces: ['paper', 'sheet-alt'] },
 ]
 
 test('the dark theme under the system setting matches the dark theme chosen with the toggle', () => {
