@@ -10,8 +10,14 @@ interface Props {
 
 const { id, data } = Astro.props.project
 const href = `/projects/${id}`
-// The Project's live site. The Portfolio site has none: it would only point at the page you're on.
-const live = data.links.live
+// Its Case Study, live site and code. The Portfolio site has no live site: it would only point at the page you're on.
+// A link to another site opens in a new tab and says so; the Portfolio site's own Case Study opens here.
+const links = [
+  { label: 'Case Study', icon: 'case-study', href: data.links.caseStudy },
+  { label: 'Live site', icon: 'live', href: data.links.live },
+  { label: 'GitHub', icon: 'github', href: data.links.code },
+] as const
+const shown = links.flatMap(({ href, ...link }) => (href ? [{ ...link, href, newTab: /^https?:/.test(href) }] : []))
 ---
 
 <!-- On a phone the dashed rule goes above the note, so the note opens its Project rather than closing the last. -->
@@ -32,40 +38,18 @@ const live = data.links.live
         ))}
       </ul>
       <p class="m-0 flex flex-wrap gap-x-6">
-        {data.links.caseStudy && (
+        {shown.map(({ label, icon, href, newTab }) => (
           <a
-            href={data.links.caseStudy}
-            aria-label={`Case Study: ${data.name} (opens in a new tab)`}
-            target="_blank"
-            rel="noopener"
+            href={href}
+            aria-label={`${label}: ${data.name}${newTab ? ' (opens in a new tab)' : ''}`}
+            target={newTab ? '_blank' : undefined}
+            rel={newTab ? 'noopener' : undefined}
             class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
           >
-            <Icon name="case-study" />
-            Case Study
+            <Icon name={icon} />
+            {label}
           </a>
-        )}
-        {live && (
-          <a
-            href={live}
-            aria-label={`Live site: ${data.name} (opens in a new tab)`}
-            target="_blank"
-            rel="noopener"
-            class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
-          >
-            <Icon name="live" />
-            Live site
-          </a>
-        )}
-        <a
-          href={data.links.code}
-          aria-label={`GitHub: ${data.name} (opens in a new tab)`}
-          target="_blank"
-          rel="noopener"
-          class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
-        >
-          <Icon name="github" />
-          GitHub
-        </a>
+        ))}
       </p>
     </div>
   </article>

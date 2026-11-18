@@ -11,7 +11,7 @@ interface Props {
 const { arrow = false } = Astro.props
 ---
 
-<p class="font-hand text-pen col-start-1 m-0 pt-2 text-xl leading-tight font-bold md:col-start-1 md:-rotate-3 md:pt-1 md:text-right">
+<p class="font-hand text-pen col-start-1 m-0 pt-2 text-xl leading-tight font-bold md:col-start-1 md:-rotate-3 md:pt-1 md:text-right print:hidden">
   <slot />
   {arrow && (
     <span class="hidden md:block" aria-hidden="true">

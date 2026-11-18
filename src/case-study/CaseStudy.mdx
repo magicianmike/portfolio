@@ -17,7 +17,7 @@ I had two projects that each already have a long Case Study inside the app: [MyS
 - **Stack:** Astro 7 with static output, Tailwind v4, TypeScript, MDX for this page. MySous is React and the Dad-a-base is Vue, so this one deliberately uses neither.
 - **Content:** each Project is one YAML file, checked by a Zod schema. Every Project page comes from one template.
 - **Weight:** 660 bytes of the site's own JavaScript, all of it for the theme, plus Vercel's analytics. On a phone, Lighthouse scores 100 for accessibility, best practices and SEO on every page, and CI fails a pull request that drops any of them.
-- **Process:** a spec, five decision records, and seven milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging.
+- **Process:** a spec, five decision records, and nine milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging, then a round of design changes.
 
 The code is public on GitHub, at [magicianmike/portfolio](https://github.com/magicianmike/portfolio), with the [spec](https://github.com/magicianmike/portfolio/blob/main/docs/spec.md), the [decision records](https://github.com/magicianmike/portfolio/tree/main/docs/adr) and every pull request.
 
@@ -109,7 +109,7 @@ The site's own JavaScript is two small inline scripts for the theme: one in the 
 
 Screenshots are the heaviest thing here. `astro:assets` serves each as WebP at the widths the layout needs, and every one but the first on a page loads lazily.
 
-Lighthouse runs on every pull request, on a phone, three times a page, and CI judges the median run: Accessibility, Best Practices and SEO must be 100 and Performance at least 95, or the pull request fails. The scores when the budget went in:
+Lighthouse runs on every pull request, on a phone, three times a page, and CI judges the median run: Accessibility, Best Practices and SEO must be 100 and Performance at least 95, or the pull request fails. The scores when the budget went in, with the Resume page since:
 
 <Scroll label="Lighthouse scores, on a phone">
 
@@ -117,6 +117,7 @@ Lighthouse runs on every pull request, on a phone, three times a page, and CI ju
 | ------------------- | ----------- | ------------- | -------------- | --- |
 | Home                | 100         | 100           | 100            | 100 |
 | About               | 100         | 100           | 100            | 100 |
+| Resume              | 100         | 100           | 100            | 100 |
 | This Case Study     | 100         | 100           | 100            | 100 |
 | Each Project's page | 98          | 100           | 100            | 100 |
 
@@ -134,8 +135,8 @@ WCAG 2.2 AA, in both themes, checked on every pull request:
 
 - **axe on every page, in light and dark,** in Chromium and in WebKit on an iPhone, after the fonts have loaded, since they're part of the contrast.
 - **Contrast is tested from the tokens themselves.** A test reads the colour values out of the stylesheet and checks every text colour against every surface, in both themes, so a change of value can't slip past.
-- **The theme toggle** is a button named "Dark theme" that says whether it's pressed. It follows the system until it's used, and without JavaScript it stays hidden and the page simply follows the system.
-- **Links that repeat say whose they are.** Each Project page has a Live site, Case Study and Code link, so their names start with the visible words and then name the Project: "Case Study: MySous". A screen reader's list of links has no two the same, and speech input can still say what it sees.
+- **The theme toggle** looks like a switch but is a button named "Dark theme" that says whether it's pressed. It follows the system until it's used, and without JavaScript it stays hidden and the page simply follows the system.
+- **Links that repeat say whose they are.** Each Project's card and page link to its Case Study, live site and code, so their names start with the visible words and then name the Project: "Case Study: MySous". A screen reader's list of links has no two the same, and speech input can still say what it sees. On a card, a link to another site opens in a new tab, and its name ends "(opens in a new tab)".
 - **A skip link** is the first stop on every page, and the navigation marks the page you're on.
 
 One catch came from the tooling, not a rule: Tailwind's reset takes the underline off every link, and milestone 1 shipped footer links that looked like plain text. Links are underlined by default again.
@@ -146,7 +147,18 @@ One catch came from the tooling, not a rule: Tailwind's reset takes the underlin
 
 I built this with Claude Code. It started with a grilling: Claude asked me questions in rounds until the spec had no open decisions in it, from who the site is for down to the Vercel address. Then each milestone went the same way: an issue, a branch, Claude building to the spec and the rules in [`CLAUDE.md`](https://github.com/magicianmike/portfolio/blob/main/CLAUDE.md), screenshots it looked at and fixed from, a pull request, CI, a preview deploy, and my review before I merged.
 
-The rules say Claude asks before anything outward-facing: every push, issue and pull request. The decisions stayed mine, including some it had to ask about, like leaving my phone number out of the resume. The PDF to download is printed from the same source as the page with that line removed, and a test checks that no page shows a phone number.
+The rules say Claude asks before anything outward-facing: every push, issue and pull request. The decisions stayed mine, including some it had to ask about, like leaving my phone number out of the resume. The PDF to download is printed from the resume's own page, which has no phone number on it, and a test checks that no page shows one.
+
+## After launch
+
+<Note>two more, and a round</Note>
+
+Once the first seven milestones were in, two more followed, then a round of design changes.
+
+- **About** gained a photo, taped into the page like a print, and a section on life outside of work. The same photo is the small avatar beside my name in every header. Its metadata is stripped before it's committed.
+- **The resume got [a page of its own](/resume),** word for word from the HTML resume I keep elsewhere, and in its layout: the black bar, the spaced-out labels, the striped rows. It's in this site's fonts, on a sheet taped into the notebook, with colour tokens of its own. The original's lightest grey fails 4.5:1, so here it's a shade darker. The PDF to download is printed from that page, whose print styles leave only the sheet, so the two can't drift apart.
+- **The Project cards** link straight to each Project's Case Study, live site and code, each with an icon.
+- **The theme toggle** borrows the Dad-a-base's switch: both the sun and the moon show, and a thumb slides behind the one in use. Its script didn't change, so the 660 bytes still stand.
 
 ## Found on the way
 
@@ -154,6 +166,7 @@ The rules say Claude asks before anything outward-facing: every push, issue and 
 - **CI spent five minutes installing browsers for seven seconds of tests.** The Playwright jobs now run in Playwright's own container, pinned to the same version, and take under two minutes.
 - **iCloud Drive syncs the folder the repository lives in,** and made duplicate copies of files mid-build. Each was checked against the history before it was removed.
 - **A test raced the lazy images** in WebKit on CI. It now scrolls each into view and waits for it to load.
+- **A dev server on the tests' port** made Playwright test it instead of the build, and fail on the sitemap, which only a build makes. The tests now have a port of their own.
 
 ## What's next
 
