@@ -1,5 +1,8 @@
 /** The main navigation. A page joins it when its milestone lands, so nothing links to a page that isn't there yet. */
-export const navigation = [{ label: 'Work', href: '/#work' }] as const
+export const navigation = [
+  { label: 'Work', href: '/#work' },
+  { label: 'About', href: '/about' },
+] as const
 
 export const contact = {
   email: 'mjmfxmike@gmail.com',

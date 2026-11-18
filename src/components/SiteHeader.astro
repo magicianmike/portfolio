@@ -1,6 +1,9 @@
 ---
 import { navigation } from '../navigation'
 import ThemeToggle from './ThemeToggle.astro'
+
+/** A page's own link says so; Work is a section of the home page, so it isn't marked. */
+const here = (href: string) => (href === Astro.url.pathname.replace(/\/$/, '') ? 'page' : undefined)
 ---
 
 <header class="flex flex-wrap items-center justify-between gap-4 py-6">
@@ -12,7 +15,11 @@ import ThemeToggle from './ThemeToggle.astro'
       <ul class="m-0 flex list-none gap-5 p-0 font-medium">
         {navigation.map(({ label, href }) => (
           <li>
-            <a href={href} class="no-underline hover:underline">
+            <a
+              href={href}
+              aria-current={here(href)}
+              class="no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-pen aria-[current=page]:decoration-2"
+            >
               {label}
             </a>
           </li>
