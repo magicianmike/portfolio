@@ -1,0 +1,130 @@
+---
+import MarginNote from '../components/MarginNote.astro'
+import { emphasis, resume } from '../data/resume'
+import Base from '../layouts/Base.astro'
+
+// The layout of `resume.html`, on a sheet of its own in the notebook, in the site's type and the sheet's tokens.
+const label = 'm-0 font-body text-[10px] font-semibold uppercase text-sheet-faint'
+const section = `${label} tracking-[0.4em] border-b border-sheet-rule pb-1.5`
+const small = 'text-[11px] font-semibold uppercase tracking-[0.2em] text-sheet-faint'
+---
+
+<Base
+  title="Resume · Mikel McCormick"
+  description="The resume of Mikel McCormick, Senior Software Engineer & Design Architect: impact, experience, education and skills."
+>
+  <MarginNote arrow>the resume</MarginNote>
+  <div class="grid gap-6 pt-6 pb-12 md:col-start-2">
+    <p class="m-0 flex max-w-[850px] justify-end">
+      <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
+        Download the resume (PDF, 1 page)
+      </a>
+    </p>
+
+    <article class="bg-sheet text-sheet-ink border-sheet-bar flex max-w-[850px] flex-col border-t-[10px] px-5 py-6 leading-[1.35] shadow-2xl md:px-10 md:py-8">
+      <header class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row">
+        <div>
+          <h1 class="m-0 text-4xl leading-none tracking-tight uppercase md:text-5xl">
+            Mikel M<span class="lowercase">c</span>Cormick
+          </h1>
+          <p class="text-sheet-muted m-0 mt-2 text-xl font-medium tracking-tight">{resume.title}</p>
+          <p class:list={['m-0 pt-1.5', small]}>
+            <a href={resume.linkedin.href} class="decoration-sheet-rule hover:text-sheet-muted">
+              {resume.linkedin.label}
+            </a>
+          </p>
+        </div>
+        <div class:list={['space-y-0.5 md:text-right', small]}>
+          <p class="m-0">{resume.location}</p>
+          <p class="m-0">
+            <a href={`mailto:${resume.email}`} class="decoration-sheet-rule hover:text-sheet-muted">
+              {resume.email}
+            </a>
+          </p>
+          <p class="m-0 pt-3">
+            {resume.tagline[0]}
+            <br />
+            {resume.tagline[1]}
+          </p>
+        </div>
+      </header>
+
+      <section class="mb-6" aria-labelledby="profile">
+        <h2 id="profile" class:list={[section, 'mb-2.5']}>
+          Profile
+        </h2>
+        <p class="text-sheet-body m-0 max-w-3xl text-base leading-snug font-medium">
+          {emphasis(resume.profile).map(({ text, strong }) =>
+            strong ? <strong class="font-semibold">{text}</strong> : text,
+          )}
+        </p>
+      </section>
+
+      <section class="mb-6" aria-labelledby="impact">
+        <h2 id="impact" class:list={[section, 'mb-4']}>
+          Strategic Impact &amp; Projects
+        </h2>
+        <ul class="m-0 list-none p-0">
+          {resume.impact.map(({ heading, company, body }) => (
+            <li class="odd:bg-sheet-alt grid gap-2 px-4 py-2 md:grid-cols-12 md:gap-6">
+              <h3 class="m-0 text-sm leading-tight uppercase md:col-span-4">
+                {heading}
+                <span class="text-sheet-faint font-body mt-1 block text-xs font-semibold">{company}</span>
+              </h3>
+              <p class="border-sheet-alt text-sheet-body m-0 text-sm leading-snug md:col-span-8 md:border-l-2 md:pl-5">
+                {emphasis(body).map(({ text, strong }) =>
+                  strong ? <strong class="font-semibold">{text}</strong> : text,
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="mb-4" aria-labelledby="experience">
+        <h2 id="experience" class:list={[section, 'mb-4']}>
+          Experience
+        </h2>
+        <ul class="m-0 list-none p-0">
+          {resume.experience.map(({ role, company, years, stack }) => (
+            <li class="odd:bg-sheet-alt flex flex-wrap items-baseline justify-between gap-x-4 py-2">
+              <p class="m-0 flex flex-col sm:flex-row sm:items-baseline">
+                <span class="font-display text-sm font-extrabold tracking-tight uppercase">{role}</span>
+                <span
+                  class="text-sheet-faint mx-3 hidden text-xl leading-none font-normal sm:inline"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
+                <span class="text-sheet-muted text-sm font-semibold">{company}</span>
+              </p>
+              <p class="text-sheet-faint m-0 text-[10px] font-semibold tracking-widest uppercase">{years}</p>
+              <p class="text-sheet-muted m-0 mt-0.5 basis-full text-[11px] font-semibold">{stack.join(' / ')}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div class="border-sheet-rule grid gap-6 border-t pt-6 md:grid-cols-12">
+        <section class="md:col-span-4" aria-labelledby="academic">
+          <h2 id="academic" class:list={[label, 'mb-3 tracking-[0.2em]']}>
+            Academic
+          </h2>
+          <p class="font-display m-0 text-xs font-extrabold tracking-tight uppercase">{resume.education.degree}</p>
+          <p class="text-sheet-muted m-0 mt-1 text-[11px] font-semibold">{resume.education.school}</p>
+          <p class="text-sheet-muted m-0 mt-1 text-[11px] font-semibold">
+            {resume.education.years} · {resume.education.gpa}
+          </p>
+        </section>
+        {Object.entries(resume.skills).map(([area, list]) => (
+          <section class="border-sheet-rule md:col-span-4 md:border-l md:pl-6" aria-labelledby={area.toLowerCase()}>
+            <h2 id={area.toLowerCase()} class:list={[label, 'mb-3 tracking-[0.2em]']}>
+              {area}
+            </h2>
+            <p class="text-sheet-muted m-0 text-[11px] leading-snug font-semibold tracking-wider uppercase">{list}</p>
+          </section>
+        ))}
+      </div>
+    </article>
+  </div>
+</Base>

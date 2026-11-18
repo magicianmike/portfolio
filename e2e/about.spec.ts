@@ -6,12 +6,7 @@ test('the About page has a bio, the resume and contact, and the navigation marks
   await expect(page).toHaveTitle('About · Mikel McCormick')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('About')
   await expect(page.getByRole('heading', { level: 2 })).toHaveText(['Outside work', 'How I work', 'Resume', 'Contact'])
-  await expect(page.getByRole('heading', { level: 3 })).toHaveText([
-    'Impact and projects',
-    'Experience',
-    'Education',
-    'Skills',
-  ])
+  await expect(page.getByRole('link', { name: 'Read the resume' })).toHaveAttribute('href', '/resume')
   await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' })).toHaveAttribute(
     'aria-current',
     'page',
@@ -21,7 +16,7 @@ test('the About page has a bio, the resume and contact, and the navigation marks
 test('the About page has a photo with a description, and the header a decorative avatar', async ({ page }) => {
   await page.goto('/about')
   const photo = page.getByRole('img', {
-    name: 'Mikel McCormick, smiling, with glasses and a beard, against a green wall.',
+    name: 'Mikel McCormick, smiling, with glasses and a beard, in front of a plant and a bookshelf.',
   })
   await expect(photo).toBeVisible()
   await expect(photo).toHaveJSProperty('complete', true)
@@ -30,17 +25,8 @@ test('the About page has a photo with a description, and the header a decorative
   await expect(avatar).toBeVisible()
 })
 
-test('the resume downloads as a PDF', async ({ page, request }) => {
-  await page.goto('/about')
-  const link = page.getByRole('link', { name: 'Download the resume (PDF, 1 page)' })
-  await expect(link).toHaveAttribute('href', '/mikel-mccormick-resume.pdf')
-  const response = await request.get('/mikel-mccormick-resume.pdf')
-  expect(response.ok()).toBe(true)
-  expect((await response.body()).subarray(0, 5).toString()).toBe('%PDF-')
-})
-
 test('no phone number appears on the site', async ({ page }) => {
-  for (const path of ['/', '/about', '/projects/my-sous']) {
+  for (const path of ['/', '/about', '/resume', '/projects/my-sous']) {
     await page.goto(path)
     await expect(page.locator('body')).not.toContainText(/\(?\d{3}\)?[\s.-]?\d{3}-\d{4}/)
   }

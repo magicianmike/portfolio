@@ -9,12 +9,11 @@ import { contact } from '../navigation'
 const section = 'border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0'
 const body = 'border-edge grid gap-5 pt-3 pb-10 md:col-start-2 md:border-t md:border-dashed md:pt-8'
 const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl'
-const h3 = 'm-0 text-lg leading-snug font-extrabold'
 ---
 
 <Base
   title="About · Mikel McCormick"
-  description="About Mikel McCormick, a product-minded frontend engineer with 18 years between design and engineering, and his resume."
+  description="About Mikel McCormick, a product-minded frontend engineer with 18 years between design and engineering, and life outside work."
 >
   <MarginNote arrow>that's me</MarginNote>
   <header class="grid gap-10 pt-6 pb-12 md:col-start-2 lg:grid-cols-[minmax(0,42rem)_16rem] lg:items-start lg:gap-14">
@@ -40,7 +39,7 @@ const h3 = 'm-0 text-lg leading-snug font-extrabold'
       <div class="border-edge bg-card rounded-sm border p-2.5 pb-3 shadow-md">
         <Image
           src={headshot}
-          alt="Mikel McCormick, smiling, with glasses and a beard, against a green wall."
+          alt="Mikel McCormick, smiling, with glasses and a beard, in front of a plant and a bookshelf."
           width={256}
           widths={[224, 256, 448, 512]}
           sizes="(min-width: 48rem) 15rem, 11rem"
@@ -97,64 +96,24 @@ const h3 = 'm-0 text-lg leading-snug font-extrabold'
   <section class={section} aria-labelledby="resume">
     <MarginNote>the resume</MarginNote>
     <div class={body}>
-      <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <h2 id="resume" class={h2}>
-          Resume
-        </h2>
-        <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
-          Download the resume (PDF, 1 page)
-        </a>
-      </div>
-      <p class="text-text-muted m-0">
-        {resume.title} · {resume.location} · {resume.experienceSummary}
+      <h2 id="resume" class={h2}>
+        Resume
+      </h2>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        {resume.title}: impact, experience, education and skills, on a page of its own.
       </p>
-      <p class="m-0 max-w-2xl text-lg leading-relaxed">{resume.profile}</p>
-
-      <h3 class={h3}>Impact and projects</h3>
-      <ul class="m-0 grid list-none gap-4 p-0">
-        {resume.impact.map(({ heading, company, body: text }) => (
-          <li class="grid max-w-3xl gap-1 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-6">
-            <p class="m-0 font-semibold">
-              {heading}
-              <span class="text-text-muted block font-normal">{company}</span>
-            </p>
-            <p class="m-0 leading-relaxed">{text}</p>
-          </li>
-        ))}
+      <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0">
+        <li>
+          <a href="/resume" class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
+            Read the resume
+          </a>
+        </li>
+        <li>
+          <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
+            Download the resume (PDF, 1 page)
+          </a>
+        </li>
       </ul>
-
-      <h3 class={h3}>Experience</h3>
-      <ul class="m-0 grid list-none gap-4 p-0">
-        {resume.experience.map(({ role, company, years, stack }) => (
-          <li class="grid max-w-3xl gap-1">
-            <p class="m-0 flex flex-wrap justify-between gap-x-4">
-              <span>
-                <strong>{role}</strong>, {company}
-              </span>
-              <span class="text-text-muted tabular-nums">{years}</span>
-            </p>
-            <p class="text-text-muted m-0 text-sm">{stack.join(' · ')}</p>
-          </li>
-        ))}
-      </ul>
-
-      <h3 class={h3}>Education</h3>
-      <p class="m-0">
-        <strong>{resume.education.degree}</strong>, {resume.education.school}{' '}
-        <span class="text-text-muted">
-          · {resume.education.years} · {resume.education.gpa}
-        </span>
-      </p>
-
-      <h3 class={h3}>Skills</h3>
-      <dl class="m-0 grid max-w-3xl gap-3 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-x-6">
-        {Object.entries(resume.skills).map(([area, list]) => (
-          <>
-            <dt class="font-semibold">{area}</dt>
-            <dd class="m-0">{list}</dd>
-          </>
-        ))}
-      </dl>
     </div>
   </section>
 

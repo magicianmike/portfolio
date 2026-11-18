@@ -39,21 +39,26 @@ function token(tokens: Record<string, string>, name: string) {
   return value
 }
 
-const TEXT = ['text', 'text-muted', 'pen']
-const SURFACES = ['paper', 'card']
+/** Each set of text colours and the surfaces it sits on: the notebook's, and the resume sheet's. */
+const PAIRS = [
+  { text: ['text', 'text-muted', 'pen'], surfaces: ['paper', 'card'] },
+  { text: ['sheet-ink', 'sheet-body', 'sheet-muted', 'sheet-faint'], surfaces: ['sheet', 'sheet-alt'] },
+]
 
 test('the dark theme under the system setting matches the dark theme chosen with the toggle', () => {
   assert.deepEqual(block(":root:not([data-theme='light'])"), themes.dark)
 })
 
 for (const [theme, tokens] of Object.entries(themes)) {
-  for (const fg of TEXT) {
-    for (const bg of SURFACES) {
-      test(`${fg} on ${bg} is at least 4.5:1, ${theme}`, () => {
-        const [a, b] = [token(tokens, fg), token(tokens, bg)]
-        const ratio = contrast(a, b)
-        assert.ok(ratio >= 4.5, `${fg} ${a} on ${bg} ${b} is ${ratio.toFixed(2)}:1`)
-      })
+  for (const { text, surfaces } of PAIRS) {
+    for (const fg of text) {
+      for (const bg of surfaces) {
+        test(`${fg} on ${bg} is at least 4.5:1, ${theme}`, () => {
+          const [a, b] = [token(tokens, fg), token(tokens, bg)]
+          const ratio = contrast(a, b)
+          assert.ok(ratio >= 4.5, `${fg} ${a} on ${bg} ${b} is ${ratio.toFixed(2)}:1`)
+        })
+      }
     }
   }
 }
