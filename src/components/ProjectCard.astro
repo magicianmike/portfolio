@@ -35,7 +35,9 @@ const live = data.links.live
         {data.links.caseStudy && (
           <a
             href={data.links.caseStudy}
-            aria-label={`Case Study: ${data.name}`}
+            aria-label={`Case Study: ${data.name} (opens in a new tab)`}
+            target="_blank"
+            rel="noopener"
             class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
           >
             <Icon name="case-study" />
@@ -45,7 +47,9 @@ const live = data.links.live
         {live && (
           <a
             href={live}
-            aria-label={`Live site: ${data.name}`}
+            aria-label={`Live site: ${data.name} (opens in a new tab)`}
+            target="_blank"
+            rel="noopener"
             class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
           >
             <Icon name="live" />
@@ -54,7 +58,9 @@ const live = data.links.live
         )}
         <a
           href={data.links.code}
-          aria-label={`GitHub: ${data.name}`}
+          aria-label={`GitHub: ${data.name} (opens in a new tab)`}
+          target="_blank"
+          rel="noopener"
           class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
         >
           <Icon name="github" />

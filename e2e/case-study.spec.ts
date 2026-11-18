@@ -17,9 +17,8 @@ test("the Case Study's chapters, in order, and the navigation marks it", async (
     // MDX sets typographic apostrophes.
     'What\u2019s next',
   ])
-  await expect(
-    page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Case study' }),
-  ).toHaveAttribute('aria-current', 'page')
+  // It's reached from the Portfolio site's card and Project page, not the main navigation.
+  await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Case study' })).toHaveCount(0)
 })
 
 test('its links reach the Projects, the code and the decision records', async ({ page }) => {

@@ -10,8 +10,8 @@ interface Props {
 
 const { name, class: className } = Astro.props
 const classes = ['size-[1.1em] shrink-0', className]
-// The outline marks share one stroke style; the brand marks are filled. The book's weight sits high in its drawing, so
-// its box starts above it, to centre it on the text.
+// The outline marks share one stroke style; the brand marks are filled. The book and the globe sit high in
+// their drawings, so their boxes start above them, to centre them on the text.
 const outline = {
   fill: 'none',
   stroke: 'currentColor',
@@ -32,7 +32,7 @@ const outline = {
     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
   </svg>
 ) : name === 'live' ? (
-  <svg viewBox="0 0 24 24" {...outline} class:list={classes} aria-hidden="true">
+  <svg viewBox="0 -1 24 24" {...outline} class:list={classes} aria-hidden="true">
     <circle cx="12" cy="12" r="10" />
     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
     <path d="M2 12h20" />

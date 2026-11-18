@@ -14,7 +14,7 @@ Mikel McCormick's portfolio, a small static site that presents his projects to h
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`                | The hero (name, positioning, one sentence), then a Project card each for MySous, the Dad-a-base and the Portfolio site, in that order |
 | `/projects/<slug>` | A Project page, from one template (below)                                                                                             |
-| `/case-study`      | This site's own Case Study, in MDX                                                                                                    |
+| `/case-study`      | The Portfolio site's own Case Study, in MDX, reached from its card and Project page                                                   |
 | `/about`           | A photo, a short bio, life outside of work, and links to the resume and its PDF                                                       |
 | `/resume`          | The resume as HTML, laid out as `resume.html` is, and a PDF download                                                                  |
 | 404                | A styled not-found page linking home                                                                                                  |
@@ -86,7 +86,7 @@ CI must pass before a merge:
 
 ## The Case Study
 
-`/case-study`, in MDX, in the same voice as the other two: why Astro, the content model, performance and the Lighthouse numbers, accessibility, and building with Claude. It's linked from the home page as the Portfolio site's card, and from the footer.
+`/case-study`, in MDX, in the same voice as the other two: why Astro, the content model, performance and the Lighthouse numbers, accessibility, and building with Claude. It's linked from the Portfolio site's card on the home page and from its Project page, not from the main navigation.
 
 ## Process
 

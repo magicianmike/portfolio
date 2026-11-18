@@ -65,7 +65,7 @@ test('the header names the site and the footer says how to get in touch', async 
   await page.goto('/')
   await expect(page.getByRole('link', { name: 'Mikel McCormick' })).toHaveAttribute('href', '/')
   const nav = page.getByRole('navigation', { name: 'Main' })
-  await expect(nav.getByRole('link')).toHaveText(['Work', 'About', 'Resume', 'Case study'])
+  await expect(nav.getByRole('link')).toHaveText(['Work', 'About', 'Resume'])
   await expect(nav.getByRole('link', { name: 'Work' })).toHaveAttribute('href', '/#work')
   await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about')
   const footer = page.getByRole('contentinfo')
