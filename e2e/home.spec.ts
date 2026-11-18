@@ -35,10 +35,10 @@ test('each Project card shows its screenshot and links to its Project page', asy
 test('the header names the site and the footer says how to get in touch', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('link', { name: 'Mikel McCormick' })).toHaveAttribute('href', '/')
-  await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Work' })).toHaveAttribute(
-    'href',
-    '/#work',
-  )
+  const nav = page.getByRole('navigation', { name: 'Main' })
+  await expect(nav.getByRole('link')).toHaveText(['Work', 'About'])
+  await expect(nav.getByRole('link', { name: 'Work' })).toHaveAttribute('href', '/#work')
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('href', '/about')
   const footer = page.getByRole('contentinfo')
   await expect(footer.getByRole('link', { name: 'mjmfxmike@gmail.com' })).toHaveAttribute(
     'href',

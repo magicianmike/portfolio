@@ -1,0 +1,134 @@
+---
+import MarginNote from '../components/MarginNote.astro'
+import { resume } from '../data/resume'
+import Base from '../layouts/Base.astro'
+import { contact } from '../navigation'
+
+const section = 'border-edge col-span-full grid grid-cols-subgrid border-t border-dashed md:border-t-0'
+const body = 'border-edge grid gap-5 pt-3 pb-10 md:col-start-2 md:border-t md:border-dashed md:pt-8'
+const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl'
+const h3 = 'm-0 text-lg leading-snug font-extrabold'
+---
+
+<Base
+  title="About · Mikel McCormick"
+  description="About Mikel McCormick, a product-minded frontend engineer with 18 years between design and engineering, and his resume."
+>
+  <MarginNote arrow>that's me</MarginNote>
+  <header class="grid max-w-2xl gap-5 pt-6 pb-12 md:col-start-2">
+    <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">About</h1>
+    <p class="m-0 text-lg leading-relaxed">
+      I'm a software engineer with 18+ years of experience building web applications, shaping user experiences, and
+      improving the systems behind them. My work spans frontend architecture, UX and UI design, design systems, and
+      AI-powered products.
+    </p>
+    <p class="m-0 text-lg leading-relaxed">
+      I've spent much of my career working between design and engineering. I enjoy taking an early product idea, working
+      through the interaction and technical details, and turning it into software that is useful, maintainable, and good
+      to use.
+    </p>
+  </header>
+
+  <section class={section} aria-labelledby="how-i-work">
+    <MarginNote>how I work</MarginNote>
+    <div class={body}>
+      <h2 id="how-i-work" class={h2}>
+        How I work
+      </h2>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        I like solving problems that cross the boundary between design and engineering. Sometimes that means getting
+        into the details of an interaction. Other times, it means stepping back to improve the architecture or establish
+        a reusable pattern that makes future work easier.
+      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        I'm comfortable working independently, getting up to speed in an unfamiliar codebase, and taking a problem from
+        an early idea through production. I value clear communication, sound technical decisions, and software that
+        works well for the people who depend on it.
+      </p>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="resume">
+    <MarginNote>the resume</MarginNote>
+    <div class={body}>
+      <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <h2 id="resume" class={h2}>
+          Resume
+        </h2>
+        <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
+          Download the resume (PDF, 1 page)
+        </a>
+      </div>
+      <p class="text-text-muted m-0">
+        {resume.title} · {resume.location} · {resume.experienceSummary}
+      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">{resume.profile}</p>
+
+      <h3 class={h3}>Impact and projects</h3>
+      <ul class="m-0 grid list-none gap-4 p-0">
+        {resume.impact.map(({ heading, company, body: text }) => (
+          <li class="grid max-w-3xl gap-1 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-6">
+            <p class="m-0 font-semibold">
+              {heading}
+              <span class="text-text-muted block font-normal">{company}</span>
+            </p>
+            <p class="m-0 leading-relaxed">{text}</p>
+          </li>
+        ))}
+      </ul>
+
+      <h3 class={h3}>Experience</h3>
+      <ul class="m-0 grid list-none gap-4 p-0">
+        {resume.experience.map(({ role, company, years, stack }) => (
+          <li class="grid max-w-3xl gap-1">
+            <p class="m-0 flex flex-wrap justify-between gap-x-4">
+              <span>
+                <strong>{role}</strong>, {company}
+              </span>
+              <span class="text-text-muted tabular-nums">{years}</span>
+            </p>
+            <p class="text-text-muted m-0 text-sm">{stack.join(' · ')}</p>
+          </li>
+        ))}
+      </ul>
+
+      <h3 class={h3}>Education</h3>
+      <p class="m-0">
+        <strong>{resume.education.degree}</strong>, {resume.education.school}{' '}
+        <span class="text-text-muted">
+          · {resume.education.years} · {resume.education.gpa}
+        </span>
+      </p>
+
+      <h3 class={h3}>Skills</h3>
+      <dl class="m-0 grid max-w-3xl gap-3 md:grid-cols-[8rem_minmax(0,1fr)] md:gap-x-6">
+        {Object.entries(resume.skills).map(([area, list]) => (
+          <>
+            <dt class="font-semibold">{area}</dt>
+            <dd class="m-0">{list}</dd>
+          </>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class={section} aria-labelledby="contact">
+    <MarginNote>get in touch</MarginNote>
+    <div class={body}>
+      <h2 id="contact" class={h2}>
+        Contact
+      </h2>
+      <ul class="m-0 grid list-none gap-2 p-0 text-lg">
+        <li>
+          Email: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </li>
+        <li>
+          LinkedIn: <a href={contact.linkedin}>mikel-mccormick-b054b445</a>
+        </li>
+        <li>
+          GitHub: <a href={contact.github}>magicianmike</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>
