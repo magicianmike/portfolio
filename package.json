@@ -12,7 +12,8 @@
     "check": "npm run lint && npm run typecheck && npm test && npm run build",
     "test:e2e": "playwright test",
     "test": "node --test \"src/**/*.test.ts\"",
-    "screenshots": "astro build && node scripts/screenshots.ts"
+    "screenshots": "astro build && node scripts/screenshots.ts",
+    "resume-pdf": "astro build && node scripts/resume-pdf.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.6",

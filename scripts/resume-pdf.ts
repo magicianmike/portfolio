@@ -1,29 +1,39 @@
 /**
- * Prints the resume to `public/mikel-mccormick-resume.pdf` from `resume.html` in the author's `resume` repository,
- * with the phone number left out: the site is public, and its contact is email, GitHub and LinkedIn. The page's text is
- * in `src/data/resume.ts`; run this again whenever the resume changes.
+ * Prints the resume to `public/mikel-mccormick-resume.pdf` from the site's own `/resume` page, so the page and the PDF
+ * share one source, `src/data/resume.ts`. The page's print styles leave out the site around the sheet. Run it whenever
+ * the resume changes; it builds the site first.
  *
- *   node scripts/resume-pdf.ts [path/to/resume.html]
+ *   npm run resume-pdf
  */
 import { chromium } from '@playwright/test'
-import { pathToFileURL } from 'node:url'
+import { spawn } from 'node:child_process'
 
-const source = process.argv[2] ?? new URL('../../resume/resume.html', import.meta.url).pathname
+const SELF = 'http://localhost:4398'
 const out = new URL('../public/mikel-mccormick-resume.pdf', import.meta.url).pathname
 
-const browser = await chromium.launch()
-const page = await browser.newPage()
-await page.goto(pathToFileURL(source).href, { waitUntil: 'networkidle' })
-await page.evaluate(() => document.fonts.ready)
+// The build, served by Astro's preview in the foreground (see playwright.config.ts), on a port of its own.
+const preview = spawn('npx', ['astro', 'preview', '--port', '4398', '--ignore-lock'], { stdio: 'ignore' })
+try {
+  for (let i = 0; i < 50; i++) {
+    if (
+      await fetch(SELF).then(
+        (r) => r.ok,
+        () => false,
+      )
+    )
+      break
+    await new Promise((r) => setTimeout(r, 200))
+  }
 
-const removed = await page.evaluate(() => {
-  const phone = [...document.querySelectorAll('p')].filter((p) => /\(\d{3}\)\s*\d{3}-\d{4}/.test(p.textContent ?? ''))
-  phone.forEach((p) => p.remove())
-  return phone.length
-})
-if (removed !== 1) throw new Error(`Expected one phone number in the resume, found ${removed}.`)
-
-await page.emulateMedia({ media: 'print' })
-await page.pdf({ path: out, format: 'Letter', printBackground: true })
-await browser.close()
-console.log(`Printed ${out}`)
+  const browser = await chromium.launch()
+  // Printed in the light theme, as on paper.
+  const page = await browser.newPage({ colorScheme: 'light' })
+  await page.goto(`${SELF}/resume`, { waitUntil: 'networkidle' })
+  await page.evaluate(() => document.fonts.ready)
+  await page.emulateMedia({ media: 'print', colorScheme: 'light' })
+  await page.pdf({ path: out, format: 'Letter', printBackground: true, preferCSSPageSize: true })
+  await browser.close()
+  console.log(`Printed ${out}`)
+} finally {
+  preview.kill()
+}

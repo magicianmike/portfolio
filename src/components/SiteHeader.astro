@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle.astro'
 const here = (href: string) => (href === Astro.url.pathname.replace(/\/$/, '') ? 'page' : undefined)
 ---
 
-<header class="flex flex-wrap items-center justify-between gap-4 py-6">
+<header class="flex flex-wrap items-center justify-between gap-4 py-6 print:hidden">
   <a href="/" class="font-display inline-flex items-center gap-3 text-xl font-extrabold no-underline">
     <!-- Decorative: the name beside it says who it is, and the About page has the photo with its description. -->
     <Image

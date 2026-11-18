@@ -1,7 +1,7 @@
 /**
  * The resume, copied word for word from `resume.html` in the author's `resume` repository and kept up to date by hand
  * (the spec). `**…**` marks the words it sets in bold. No phone number: the site is public, and its contact is email,
- * GitHub and LinkedIn. The downloadable PDF is printed from the same source by `scripts/resume-pdf.ts`.
+ * GitHub and LinkedIn. The downloadable PDF is printed from the `/resume` page by `npm run resume-pdf`.
  */
 export const resume = {
   title: 'Senior Software Engineer & Design Architect',

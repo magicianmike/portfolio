@@ -3,7 +3,8 @@ import MarginNote from '../components/MarginNote.astro'
 import { emphasis, resume } from '../data/resume'
 import Base from '../layouts/Base.astro'
 
-// The layout of `resume.html`, on a sheet of its own in the notebook, in the site's type and the sheet's tokens.
+// The layout of `resume.html`, on a sheet of its own in the notebook, in the site's type and the sheet's tokens. Printed,
+// only the sheet shows, edge to edge on a Letter page: `scripts/resume-pdf.ts` makes the PDF from it.
 const label = 'm-0 font-body text-[10px] font-semibold uppercase text-sheet-faint'
 const section = `${label} tracking-[0.4em] border-b border-sheet-rule pb-1.5`
 const small = 'text-[11px] font-semibold uppercase tracking-[0.2em] text-sheet-faint'
@@ -14,21 +15,21 @@ const small = 'text-[11px] font-semibold uppercase tracking-[0.2em] text-sheet-f
   description="The resume of Mikel McCormick, Senior Software Engineer & Design Architect: impact, experience, education and skills."
 >
   <MarginNote arrow>the resume</MarginNote>
-  <div class="grid gap-6 pt-6 pb-12 md:col-start-2">
-    <p class="m-0 flex max-w-[850px] justify-end">
+  <div class="grid gap-6 pt-6 pb-12 md:col-start-2 print:block print:p-0">
+    <p class="m-0 flex max-w-[850px] justify-end print:hidden">
       <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
         Download the resume (PDF, 1 page)
       </a>
     </p>
 
     <!-- A sheet taped into the notebook: tape across its top corners, and a shadow that lifts it off the page. -->
-    <article class="bg-sheet text-sheet-ink border-sheet-bar shadow-sheet relative flex max-w-[850px] flex-col border-t-[10px] px-5 py-6 leading-[1.35] md:px-10 md:py-8">
+    <article class="bg-sheet text-sheet-ink border-sheet-bar shadow-sheet relative flex max-w-[850px] flex-col border-t-[10px] px-5 py-6 leading-[1.35] md:px-10 md:py-8 print:max-w-none print:px-9 print:py-7 print:shadow-none">
       <span
-        class="bg-tape absolute -top-5 -left-2 h-7 w-20 -rotate-[30deg] opacity-85 shadow-sm md:-left-5 md:w-28"
+        class="bg-tape absolute -top-5 -left-2 h-7 w-20 -rotate-[30deg] opacity-85 shadow-sm md:-left-5 md:w-28 print:hidden"
         aria-hidden="true"
       ></span>
       <span
-        class="bg-tape absolute -top-5 -right-2 h-7 w-20 rotate-[30deg] opacity-85 shadow-sm md:-right-5 md:w-28"
+        class="bg-tape absolute -top-5 -right-2 h-7 w-20 rotate-[30deg] opacity-85 shadow-sm md:-right-5 md:w-28 print:hidden"
         aria-hidden="true"
       ></span>
       <header class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row">

@@ -145,6 +145,19 @@
     text-underline-offset: 0.2em;
   }
 
+  /* Printed, the page is plain: the resume prints edge to edge, without the notebook's ruling. */
+  @media print {
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    html,
+    body {
+      background: var(--color-sheet);
+    }
+  }
+
   :focus-visible {
     outline: 3px solid var(--color-pen);
     outline-offset: 3px;

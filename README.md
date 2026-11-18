@@ -40,7 +40,7 @@ npm run dev          # http://localhost:4321
 | `npx lhci autorun`    | The Lighthouse budget, on a phone, after `npm run build`                             |
 | `npm run screenshots` | Recapture every Project's screenshots; `-- my-sous` for one                          |
 
-`node scripts/resume-pdf.ts` reprints the resume PDF from the `resume` repository, and `node scripts/icons.ts` renders the PNG icons from `public/favicon.svg`.
+`npm run resume-pdf` reprints the resume PDF from the site's own `/resume` page, and `node scripts/icons.ts` renders the PNG icons from `public/favicon.svg`.
 
 ## Quality
 
