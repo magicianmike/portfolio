@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
 export default defineConfig({
-  site: 'https://mikelmccormick.vercel.app',
+  site: 'https://www.mjmfx.com',
   // One address per page, as the site links to them: canonical links and the sitemap agree.
   trailingSlash: 'never',
   integrations: [mdx(), sitemap()],

@@ -13,3 +13,7 @@ The only client-side scripts are the theme toggle, which must run before first p
 - Pages work without JavaScript, apart from remembering the theme.
 - Lighthouse Performance has little to lose; the budget is 95 or more on mobile.
 - Any new script needs the author's agreement and a note here.
+
+## Since
+
+18 November 2026, with the author's agreement: a third script, 342 bytes, on the home page only. Arriving from another page's Work link, it opens the page at the top and then scrolls down to the Projects, as a click on Work does on the home page itself, where CSS's `scroll-behavior` does it with no script. With less motion asked for, or without JavaScript, the page jumps to the Projects instead.

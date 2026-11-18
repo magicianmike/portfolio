@@ -158,6 +158,13 @@
     }
   }
 
+  /* Links to a part of the page glide there, unless the Visitor has asked for less motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   :focus-visible {
     outline: 3px solid var(--color-pen);
     outline-offset: 3px;
@@ -206,7 +213,7 @@
   .prose :where(h2):not(:where(.not-prose *)) {
     margin: 3.5rem 0 1rem;
     padding-top: 2rem;
-    border-top: 1px dashed var(--color-edge);
+    border-top: 2px dashed var(--color-divider);
     font-size: 1.875rem;
     font-weight: 800;
     line-height: 1.15;

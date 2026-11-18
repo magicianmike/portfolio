@@ -36,11 +36,11 @@ Every Project page has the same sections, in this order, so Projects are easy to
 
 ### The Projects
 
-| Project        | Live                                | Case Study                                     | Code                                         | Stack in brief                     |
-| -------------- | ----------------------------------- | ---------------------------------------------- | -------------------------------------------- | ---------------------------------- |
-| MySous         | <https://my-sous.vercel.app>        | <https://my-sous.vercel.app/case-study>        | <https://github.com/magicianmike/my-sous>    | Next.js 16 static export, React 19 |
-| The Dad-a-base | <https://the-dad-a-base.vercel.app> | <https://the-dad-a-base.vercel.app/case-study> | <https://github.com/magicianmike/dad-a-base> | Vue 3, Apollo over REST, Pinia     |
-| Portfolio site | the home page                       | `/case-study`                                  | <https://github.com/magicianmike/portfolio>  | Astro, Tailwind v4                 |
+| Project        | Live                               | Case Study                                    | Code                                         | Stack in brief                     |
+| -------------- | ---------------------------------- | --------------------------------------------- | -------------------------------------------- | ---------------------------------- |
+| MySous         | <https://my-sous.mjmfx.com>        | <https://my-sous.mjmfx.com/case-study>        | <https://github.com/magicianmike/my-sous>    | Next.js 16 static export, React 19 |
+| The Dad-a-base | <https://the-dad-a-base.mjmfx.com> | <https://the-dad-a-base.mjmfx.com/case-study> | <https://github.com/magicianmike/dad-a-base> | Vue 3, Apollo over REST, Pinia     |
+| Portfolio site | the home page                      | `/case-study`                                 | <https://github.com/magicianmike/portfolio>  | Astro, Tailwind v4                 |
 
 The Dad-a-base's live deploy comes from the repository it was first built in, so its Case Study is framed slightly differently from the public copy of its code. That's accepted for now and revisited later.
 
@@ -70,7 +70,7 @@ Quiet and typographic, so each Project's own look carries the colour in its scre
 - **Astro 7**, static output, with MDX for the Case Study ([ADR 0001](adr/0001-astro.md)).
 - **Tailwind v4**, with the theme's tokens as CSS variables in `@theme` ([ADR 0002](adr/0002-tailwind-v4-tokens.md)).
 - **Projects in a content collection** with a Zod schema, so a new Project is one file and a missing field fails the build ([ADR 0003](adr/0003-projects-as-content.md)).
-- **Near-zero JavaScript:** the theme toggle and Vercel Web Analytics are the only scripts. No framework islands ([ADR 0004](adr/0004-near-zero-js.md)).
+- **Near-zero JavaScript:** the theme toggle, the glide to Work on the home page, and Vercel Web Analytics are the only scripts. No framework islands ([ADR 0004](adr/0004-near-zero-js.md)).
 - **Screenshots** are captured from the live apps by a Playwright script, at desktop and phone sizes, in light and dark, committed, and optimised by `astro:assets`. Every image has real alt text.
 - **Vercel Web Analytics:** cookieless, no consent banner. Unlike the Projects, which have no analytics, the portfolio wants to know whether its Case Studies are read, and its Case Study says so.
 - **SEO:** a sitemap, `robots.txt`, an Open Graph image per page made at build time, and an initials favicon set.
@@ -93,7 +93,7 @@ CI must pass before a merge:
 - [`CLAUDE.md`](../CLAUDE.md), [`GLOSSARY.md`](../GLOSSARY.md), decision records in `docs/adr/`.
 - Each milestone is a GitHub issue and a pull request. The repository is public from its first commit.
 - Journals in `docs/journal/` for visual-direction work only.
-- Deploys use Vercel's Git integration: a preview for every pull request, production on merge to `main`, at `mikelmccormick.vercel.app` (or `mikel-mccormick.vercel.app` if the first is taken) ([ADR 0005](adr/0005-vercel-git-integration.md)).
+- Deploys use Vercel's Git integration: a preview for every pull request, production on merge to `main`, at `www.mjmfx.com` (`mjmfx.com` redirects to it) ([ADR 0005](adr/0005-vercel-git-integration.md)).
 
 ## Milestones
 
