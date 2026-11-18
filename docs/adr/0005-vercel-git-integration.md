@@ -11,3 +11,7 @@ The site deploys through Vercel's Git integration: every pull request gets a pre
 
 - Production is whatever `main` is. CI must pass before a merge.
 - The address is `mikelmccormick.vercel.app`, or `mikel-mccormick.vercel.app` if that's taken.
+
+## Since
+
+18 November 2026: the site moved to the author's own domain, `www.mjmfx.com`, with `mjmfx.com` redirecting to it. MySous and the Dad-a-base moved with it, to `my-sous.mjmfx.com` and `the-dad-a-base.mjmfx.com`. The deploys are unchanged.

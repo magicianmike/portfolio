@@ -16,7 +16,7 @@ I had two projects that each already have a long Case Study inside the app: [MyS
 
 - **Stack:** Astro 7 with static output, Tailwind v4, TypeScript, MDX for this page. MySous is React and the Dad-a-base is Vue, so this one deliberately uses neither.
 - **Content:** each Project is one YAML file, checked by a Zod schema. Every Project page comes from one template.
-- **Weight:** 660 bytes of the site's own JavaScript, all of it for the theme, plus Vercel's analytics. On a phone, Lighthouse scores 100 for accessibility, best practices and SEO on every page, and CI fails a pull request that drops any of them.
+- **Weight:** about 1 KB of the site's own JavaScript, for the theme and the glide to Work, plus Vercel's analytics. On a phone, Lighthouse scores 100 for accessibility, best practices and SEO on every page, and CI fails a pull request that drops any of them.
 - **Process:** a spec, five decision records, and nine milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging, then a round of design changes.
 
 The code is public on GitHub, at [magicianmike/portfolio](https://github.com/magicianmike/portfolio), with the [spec](https://github.com/magicianmike/portfolio/blob/main/docs/spec.md), the [decision records](https://github.com/magicianmike/portfolio/tree/main/docs/adr) and every pull request.
@@ -103,9 +103,9 @@ Building it turned up what the prototype hadn't. The margin line ran through my 
 
 ## Performance
 
-<Note>660 bytes</Note>
+<Note>about 1 KB</Note>
 
-The site's own JavaScript is two small inline scripts for the theme: one in the head applies a remembered theme before the first paint, so the page never flashes the wrong one, and one runs the toggle. Together they're 660 bytes, 452 gzipped. The only other script is Vercel Web Analytics, which is cookieless, so there's no consent banner. Unlike MySous and the Dad-a-base, which have no analytics, this site's job is to be read by people hiring, and it's worth knowing whether the Case Studies get opened. There are no framework islands ([ADR 0004](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0004-near-zero-js.md)).
+Every page's own JavaScript is two small inline scripts for the theme: one in the head applies a remembered theme before the first paint, so the page never flashes the wrong one, and one runs the toggle. Together they're 660 bytes, 452 gzipped. The home page has one more, 342 bytes, so that Work in the navigation glides down to the Projects from another page rather than jumping there. The only other script is Vercel Web Analytics, which is cookieless, so there's no consent banner. Unlike MySous and the Dad-a-base, which have no analytics, this site's job is to be read by people hiring, and it's worth knowing whether the Case Studies get opened. There are no framework islands ([ADR 0004](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0004-near-zero-js.md)).
 
 Screenshots are the heaviest thing here. `astro:assets` serves each as WebP at the widths the layout needs, and every one but the first on a page loads lazily.
 
@@ -158,7 +158,8 @@ Once the first seven milestones were in, two more followed, then a round of desi
 - **About** gained a photo, taped into the page like a print, and a section on life outside of work. The same photo is the small avatar beside my name in every header. Its metadata is stripped before it's committed.
 - **The resume got [a page of its own](/resume),** word for word from the HTML resume I keep elsewhere, and in its layout: the black bar, the spaced-out labels, the striped rows. It's in this site's fonts, on a sheet taped into the notebook, with colour tokens of its own. The original's lightest grey fails 4.5:1, so here it's a shade darker. The PDF to download is printed from that page, whose print styles leave only the sheet, so the two can't drift apart.
 - **The Project cards** link straight to each Project's Case Study, live site and code, each with an icon.
-- **The theme toggle** borrows the Dad-a-base's switch: both the sun and the moon show, and a thumb slides behind the one in use. Its script didn't change, so the 660 bytes still stand.
+- **The theme toggle** borrows the Dad-a-base's switch: both the sun and the moon show, and a thumb slides behind the one in use. Its script didn't change.
+- **Work** in the navigation glides down to the Projects, from the home page or any other: from another page, home opens at the top and then scrolls. With less motion asked for, it jumps.
 
 ## Found on the way
 

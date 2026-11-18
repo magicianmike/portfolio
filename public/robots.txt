@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mikelmccormick.vercel.app/sitemap-index.xml
+Sitemap: https://www.mjmfx.com/sitemap-index.xml

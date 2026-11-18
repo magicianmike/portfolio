@@ -2,7 +2,7 @@ name: Portfolio site
 order: 3
 pitch: >-
   This portfolio: static HTML from Astro, a design system in Tailwind's tokens, and almost no JavaScript.
-note: 660 bytes of its own JavaScript
+note: about 1 KB of its own JavaScript
 role: Design and engineering, built with Claude Code
 problem: >-
   Two projects that each already have a long Case Study. The portfolio had to summarise and link out rather than

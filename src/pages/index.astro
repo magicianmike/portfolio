@@ -11,6 +11,19 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   title="Mikel McCormick"
   description="Mikel McCormick, product-minded frontend engineer: projects, case studies and how they were made."
 >
+  <!--
+    Arriving from another page's Work link, the page would jump straight to #work. Instead it opens at the top and
+    glides down, as it does when Work is clicked here. Without JavaScript, or with less motion asked for, it jumps.
+  -->
+  <script is:inline>
+    if (location.hash === '#work' && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      history.replaceState(null, '', location.pathname)
+      addEventListener('load', () => {
+        history.replaceState(null, '', '#work')
+        document.getElementById('work').scrollIntoView({ behavior: 'smooth' })
+      })
+    }
+  </script>
   <MarginNote arrow>hi, I'm Mikel</MarginNote>
   <div class="grid max-w-3xl gap-5 pt-6 pb-12 md:col-start-2">
     <!-- The full stop must sit right after the underline, with no space before it, so Prettier leaves this alone. -->
@@ -24,7 +37,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </p>
   </div>
 
-  <section id="work" aria-labelledby="work-heading" class="col-span-full grid grid-cols-subgrid">
+  <section id="work" aria-labelledby="work-heading" class="col-span-full grid scroll-mt-4 grid-cols-subgrid">
     <h2 id="work-heading" class="sr-only">
       Work
     </h2>

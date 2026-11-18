@@ -19,7 +19,7 @@ const SELF = 'http://localhost:4399'
 const targets: Target[] = [
   {
     slug: 'my-sous',
-    base: 'https://my-sous.vercel.app',
+    base: 'https://my-sous.mjmfx.com',
     shots: [
       { name: 'hero', path: '/' },
       { name: 'filled-in', path: '/suggestions?with=chicken-thigh,garlic', scrollTo: 'h2:text-is("Suggestions")' },
@@ -29,7 +29,7 @@ const targets: Target[] = [
   },
   {
     slug: 'dad-a-base',
-    base: 'https://the-dad-a-base.vercel.app',
+    base: 'https://the-dad-a-base.mjmfx.com',
     shots: [
       { name: 'hero', path: '/' },
       { name: 'search', path: '/search?q=cat' },

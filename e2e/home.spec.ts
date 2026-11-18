@@ -35,7 +35,7 @@ test('each Project card shows its screenshot and links to its Project page, Case
   )
   await expect(page.getByRole('link', { name: 'Case Study: MySous' })).toHaveAttribute(
     'href',
-    'https://my-sous.vercel.app/case-study',
+    'https://my-sous.mjmfx.com/case-study',
   )
   // The Portfolio site's own Case Study opens here; links to other sites open in a new tab.
   const own = page.getByRole('link', { name: 'Case Study: Portfolio site', exact: true })
@@ -57,11 +57,11 @@ test('each Project card shows its screenshot and links to its Project page, Case
   const work = page.getByRole('region', { name: 'Work' })
   await expect(work.getByRole('link', { name: 'Live site: MySous' })).toHaveAttribute(
     'href',
-    'https://my-sous.vercel.app',
+    'https://my-sous.mjmfx.com',
   )
   await expect(work.getByRole('link', { name: 'Live site: The Dad-a-base' })).toHaveAttribute(
     'href',
-    'https://the-dad-a-base.vercel.app',
+    'https://the-dad-a-base.mjmfx.com',
   )
   await expect(work.getByRole('link', { name: /^Live site/ })).toHaveCount(2)
   // One screenshot per card shows, the one for the page's theme.
@@ -99,3 +99,30 @@ for (const colorScheme of ['light', 'dark'] as const) {
     expect(violations).toEqual([])
   })
 }
+
+test('Work in the navigation glides to the Projects, from the home page or another', async ({ page }) => {
+  const workTop = () => page.evaluate(() => document.getElementById('work')?.getBoundingClientRect().top ?? NaN)
+  const nav = page.getByRole('navigation', { name: 'Main' })
+
+  // From another page: home opens at the top, then scrolls down to Work.
+  await page.goto('/about')
+  await nav.getByRole('link', { name: 'Work' }).click()
+  await expect(page).toHaveURL(/\/#work$/)
+  await expect.poll(workTop).toBeLessThan(40)
+  expect(await page.evaluate(() => scrollY)).toBeGreaterThan(200)
+
+  // On the home page: back to the top, then Work again.
+  await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }))
+  await nav.getByRole('link', { name: 'Work' }).click()
+  await expect.poll(workTop).toBeLessThan(40)
+})
+
+test('with less motion asked for, Work jumps straight to the Projects', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/about')
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Work' }).click()
+  await expect(page).toHaveURL(/\/#work$/)
+  await expect
+    .poll(() => page.evaluate(() => document.getElementById('work')?.getBoundingClientRect().top ?? NaN))
+    .toBeLessThan(40)
+})
