@@ -9,6 +9,8 @@ interface Props {
 
 const { id, data } = Astro.props.project
 const href = `/projects/${id}`
+// The Project's live site. This site has none: it would only point at the page you're on.
+const live = data.links.live
 ---
 
 <!-- On a phone the dashed rule goes above the note, so the note opens its Project rather than closing the last. -->
@@ -28,9 +30,26 @@ const href = `/projects/${id}`
           <li class="border-edge bg-card rounded-sm border px-2 py-0.5 text-sm">{item}</li>
         ))}
       </ul>
-      <a href={href} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
-        Read about {data.name}
-      </a>
+      <p class="m-0 flex flex-wrap gap-x-6">
+        {data.links.caseStudy && (
+          <a
+            href={data.links.caseStudy}
+            aria-label={`Case Study: ${data.name}`}
+            class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2"
+          >
+            Case Study
+          </a>
+        )}
+        {live && (
+          <a
+            href={live}
+            aria-label={`Live site: ${data.name}`}
+            class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2"
+          >
+            Live site
+          </a>
+        )}
+      </p>
     </div>
   </article>
 </div>

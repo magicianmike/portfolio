@@ -20,16 +20,37 @@ test('the Projects come from the content collection, in order, each with its Mar
   ])
 })
 
-test('each Project card shows its screenshot and links to its Project page', async ({ page }) => {
+test('each Project card shows its screenshot and links to its Project page, Case Study and live site', async ({
+  page,
+}) => {
   await page.goto('/')
-  await expect(page.getByRole('link', { name: 'Read about MySous' })).toHaveAttribute('href', '/projects/my-sous')
+  await expect(page.getByRole('link', { name: 'MySous', exact: true })).toHaveAttribute('href', '/projects/my-sous')
   await expect(page.getByRole('link', { name: 'The Dad-a-base', exact: true })).toHaveAttribute(
     'href',
     '/projects/dad-a-base',
   )
-  await expect(page.getByRole('link', { name: 'Read about This site' })).toHaveAttribute('href', '/projects/this-site')
+  await expect(page.getByRole('link', { name: 'This site', exact: true })).toHaveAttribute(
+    'href',
+    '/projects/this-site',
+  )
+  await expect(page.getByRole('link', { name: 'Case Study: MySous' })).toHaveAttribute(
+    'href',
+    'https://my-sous.vercel.app/case-study',
+  )
+  await expect(page.getByRole('link', { name: 'Case Study: This site' })).toHaveAttribute('href', '/case-study')
+  // Each Project with a live site links to it; This site, which is the page you're on, doesn't.
+  const work = page.getByRole('region', { name: 'Work' })
+  await expect(work.getByRole('link', { name: 'Live site: MySous' })).toHaveAttribute(
+    'href',
+    'https://my-sous.vercel.app',
+  )
+  await expect(work.getByRole('link', { name: 'Live site: The Dad-a-base' })).toHaveAttribute(
+    'href',
+    'https://the-dad-a-base.vercel.app',
+  )
+  await expect(work.getByRole('link', { name: /^Live site/ })).toHaveCount(2)
   // One screenshot per card shows, the one for the page's theme.
-  await expect(page.getByRole('region', { name: 'Work' }).getByRole('img')).toHaveCount(3)
+  await expect(work.getByRole('img')).toHaveCount(3)
 })
 
 test('the header names the site and the footer says how to get in touch', async ({ page }) => {
