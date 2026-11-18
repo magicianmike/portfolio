@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- A scrap of the site's ruled page: the red margin line, and an M in the pen's blue. Dark follows the system. -->
+  <style>
+    .paper { fill: #fdfdfb } .rule { stroke: #dbe6f2 } .margin { stroke: #e9a5a5 } .pen { stroke: #2456a6 }
+    @media (prefers-color-scheme: dark) {
+      .paper { fill: #1a1d21 } .rule { stroke: #2c343d } .margin { stroke: #a24c4c } .pen { stroke: #93b6f2 }
+    }
+  </style>
+  <rect class="paper" width="64" height="64" rx="12" />
+  <path class="rule" stroke-width="2" d="M0 22h64M0 38h64M0 54h64" />
+  <path class="margin" stroke-width="3" d="M13 0v64" />
+  <path class="pen" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="M22 49 L26 16 L37 38 L47 15 L50 49" />
+</svg>

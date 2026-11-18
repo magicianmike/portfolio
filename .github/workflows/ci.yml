@@ -45,3 +45,23 @@ jobs:
         with:
           name: playwright-report-${{ matrix.project }}
           path: playwright-report/
+
+  lighthouse:
+    name: Lighthouse budget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # On a phone, three runs a page, the median judged: Accessibility, Best Practices and SEO at 100, Performance at
+      # 95 or more (lighthouserc.json). The runner's own Chrome.
+      - run: npx lhci autorun
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/

@@ -1,11 +1,16 @@
 // @ts-check
 import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, fontProviders } from 'astro/config'
 
 export default defineConfig({
   site: 'https://mikelmccormick.vercel.app',
-  integrations: [mdx()],
+  // One address per page, as the site links to them: canonical links and the sitemap agree.
+  trailingSlash: 'never',
+  integrations: [mdx(), sitemap()],
+  // The stylesheet is small (under 5 KB gzipped), so it's inlined rather than a request that blocks the first paint.
+  build: { inlineStylesheets: 'always' },
   vite: { plugins: [tailwindcss()] },
   // Self-hosted at build time, Latin only, so the site makes no requests to a font service.
   fonts: [
@@ -13,7 +18,8 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: 'Bricolage Grotesque',
       cssVariable: '--font-bricolage',
-      weights: ['500 800'],
+      // Only the weights the site sets: one heavy weight for headings, not the whole variable range.
+      weights: ['800'],
       subsets: ['latin'],
       fallbacks: ['Avenir Next', 'system-ui', 'sans-serif'],
     },
@@ -22,7 +28,6 @@ export default defineConfig({
       name: 'IBM Plex Sans',
       cssVariable: '--font-plex',
       weights: ['400', '500', '600'],
-      styles: ['normal', 'italic'],
       subsets: ['latin'],
       fallbacks: ['Segoe UI', 'system-ui', 'sans-serif'],
     },
@@ -30,7 +35,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: 'Caveat',
       cssVariable: '--font-caveat',
-      weights: ['500 700'],
+      weights: ['700'],
       subsets: ['latin'],
       fallbacks: ['Comic Sans MS', 'cursive'],
     },

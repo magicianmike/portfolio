@@ -7,13 +7,15 @@ interface Props {
   /** The rendered widths it's served at, for the browser to choose from. */
   widths: number[]
   sizes: string
-  /** The page's main image: loaded at once, not lazily. */
+  /**
+   * The page's main image. The light capture loads at once, at high priority. The dark one stays lazy: hidden, a lazy
+   * image is never fetched, so a page loads only the capture its theme shows, at the cost of a moment's wait in dark.
+   */
   eager?: boolean
   class?: string
 }
 
 const { shot, widths, sizes, eager = false, class: className } = Astro.props
-const loading = eager ? 'eager' : 'lazy'
 // A phone's screenshot is tall: shown at a phone's width, not stretched to the column.
 const portrait = shot.light.height > shot.light.width
 ---
@@ -25,6 +27,14 @@ const portrait = shot.light.height > shot.light.width
     className,
   ]}
 >
-  <Image src={shot.light} alt={shot.alt} widths={widths} sizes={sizes} loading={loading} class="shot-light w-full" />
-  <Image src={shot.dark} alt={shot.alt} widths={widths} sizes={sizes} loading={loading} class="shot-dark w-full" />
+  <Image
+    src={shot.light}
+    alt={shot.alt}
+    widths={widths}
+    sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+    class="shot-light w-full"
+  />
+  <Image src={shot.dark} alt={shot.alt} widths={widths} sizes={sizes} loading="lazy" class="shot-dark w-full" />
 </div>

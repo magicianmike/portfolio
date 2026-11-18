@@ -79,10 +79,12 @@
     );
   }
 
+  /* Headings come in the display face's one weight, which is all the site loads of it. */
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
+    font-weight: 800;
     text-wrap: balance;
   }
 
