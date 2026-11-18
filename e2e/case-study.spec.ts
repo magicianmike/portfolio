@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-test("the Case Study's chapters, in order, and the navigation marks it", async ({ page }) => {
+test("the Case Study's chapters, in order", async ({ page }) => {
   await page.goto('/case-study')
   await expect(page).toHaveTitle('How this site was made · Mikel McCormick')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('How this site was made')
@@ -13,6 +13,7 @@ test("the Case Study's chapters, in order, and the navigation marks it", async (
     'Performance',
     'Accessibility',
     'Building with Claude',
+    'After launch',
     'Found on the way',
     // MDX sets typographic apostrophes.
     'What\u2019s next',
