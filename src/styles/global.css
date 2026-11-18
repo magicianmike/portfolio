@@ -2,8 +2,9 @@
 
 /*
  * The theme's tokens (ADR 0002), from the Margins direction (journal 0001): a ruled page with a red margin line, notes
- * in the margin in a pen's blue. The raw values live here and nowhere else. Light is the default; dark reassigns the
- * same names, under the system's setting until the Visitor picks one, and under `data-theme` after.
+ * in the margin in a pen's blue, and tape to hold a photo in. The raw values live here and nowhere else. Light is the
+ * default; dark reassigns the same names, under the system's setting until the Visitor picks one, and under
+ * `data-theme` after.
  */
 :root {
   --paper: #fdfdfb;
@@ -14,6 +15,7 @@
   --pen: #2456a6;
   --edge: #d9dde2;
   --card: #ffffff;
+  --tape: #eee2ad;
   color-scheme: light;
 }
 
@@ -27,6 +29,7 @@
     --pen: #93b6f2;
     --edge: #363c43;
     --card: #22262b;
+    --tape: #5e5741;
     color-scheme: dark;
   }
 }
@@ -40,6 +43,7 @@
   --pen: #93b6f2;
   --edge: #363c43;
   --card: #22262b;
+  --tape: #5e5741;
   color-scheme: dark;
 }
 
@@ -52,6 +56,7 @@
   --color-pen: var(--pen);
   --color-edge: var(--edge);
   --color-card: var(--card);
+  --color-tape: var(--tape);
 
   --font-display: var(--font-bricolage);
   --font-body: var(--font-plex);
