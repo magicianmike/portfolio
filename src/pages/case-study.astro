@@ -1,0 +1,21 @@
+---
+import MarginNote from '../components/MarginNote.astro'
+import CaseStudy from '../case-study/CaseStudy.mdx'
+import Base from '../layouts/Base.astro'
+---
+
+<Base
+  title="How this site was made · Mikel McCormick"
+  description="A Case Study of this portfolio: why Astro, Projects as content, the look, performance, accessibility, and building it with Claude Code."
+>
+  <MarginNote arrow>how it was made</MarginNote>
+  <header class="grid max-w-2xl gap-5 pt-6 pb-12 md:col-start-2">
+    <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">How this site was made</h1>
+    <p class="text-text-muted m-0 text-xl leading-relaxed">
+      A Case Study of this portfolio: the decisions behind it, what it weighs, and how it was built.
+    </p>
+  </header>
+  <article class="prose relative pb-12 md:col-start-2">
+    <CaseStudy />
+  </article>
+</Base>

@@ -125,3 +125,81 @@
     display: block;
   }
 }
+
+/*
+ * Long-form prose, for the Case Study: the MDX renders plain elements, so their type is set here, on the article's own
+ * elements only. Figures opt out with `not-prose`.
+ */
+@layer components {
+  .prose {
+    max-width: 42rem;
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .prose :where(h2):not(:where(.not-prose *)) {
+    margin: 3.5rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--color-edge);
+    font-size: 1.875rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    scroll-margin-top: 1.5rem;
+  }
+
+  .prose > :where(h2:first-child) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .prose :where(h3):not(:where(.not-prose *)) {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+
+  .prose :where(p, ul, ol):not(:where(.not-prose *)) {
+    margin: 0 0 1.25rem;
+  }
+
+  .prose :where(ul, ol):not(:where(.not-prose *)) {
+    padding-left: 1.25rem;
+  }
+
+  .prose :where(ul):not(:where(.not-prose *)) {
+    list-style: disc;
+  }
+
+  .prose :where(li + li):not(:where(.not-prose *)) {
+    margin-top: 0.4rem;
+  }
+
+  .prose :where(a):not(:where(.not-prose *)) {
+    text-decoration-color: var(--color-pen);
+    text-decoration-thickness: 2px;
+  }
+
+  .prose :where(code):not(:where(.not-prose *)) {
+    padding: 0 0.25rem;
+    border-radius: 0.125rem;
+    background: var(--color-card);
+    font-size: 0.9em;
+    overflow-wrap: anywhere;
+  }
+
+  .prose :where(table):not(:where(.not-prose *)) {
+    width: 100%;
+    margin: 0 0 1.5rem;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .prose :where(th, td):not(:where(.not-prose *)) {
+    padding: 0.4rem 0.75rem 0.4rem 0;
+    border-bottom: 1px solid var(--color-edge);
+    text-align: left;
+  }
+}

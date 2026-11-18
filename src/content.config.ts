@@ -31,8 +31,8 @@ const projects = defineCollection({
       highlights: z.array(z.object({ heading: z.string(), body: z.string(), shot })).length(3),
       next: z.array(z.string()).min(1),
       /**
-       * Only links to pages that exist. This site's own Case Study joins in milestone 5, so its link is optional until
-       * then; a Live link to the home page from the home page would go nowhere.
+       * Only links to pages that exist. This site's Live link would only point at the site you're on, so it has none;
+       * its Case Study is this site's own `/case-study`.
        */
       links: z.object({
         live: z.url().optional(),

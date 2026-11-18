@@ -1,0 +1,10 @@
+---
+/**
+ * A Margin note inside the Case Study's prose. The prose is one column, so on a wide screen the note is lifted out into
+ * the page's margin beside the paragraph after it; on a phone it sits above that paragraph, as a MarginNote does.
+ */
+---
+
+<p class="font-hand text-pen m-0 text-xl leading-tight font-bold md:absolute md:right-[calc(100%+2rem)] md:w-(--spacing-margin) md:-rotate-3 md:text-right">
+  <slot />
+</p>

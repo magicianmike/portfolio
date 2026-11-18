@@ -1,0 +1,159 @@
+import Figures from './Figures.astro'
+import Note from './Note.astro'
+import Scroll from './Scroll.astro'
+import variantSwiss from '../assets/case-study/variant-swiss.png'
+import variantEditorial from '../assets/case-study/variant-editorial.png'
+import variantNotebook from '../assets/case-study/variant-notebook.png'
+import variantMono from '../assets/case-study/variant-mono.png'
+import riffMargins from '../assets/case-study/riff-margins.png'
+import riffPad from '../assets/case-study/riff-pad.png'
+import riffCards from '../assets/case-study/riff-cards.png'
+import riffPolaroid from '../assets/case-study/riff-polaroid.png'
+
+## In 60 seconds
+
+I had two projects that each already have a long Case Study inside the app: [MySous](/projects/my-sous) and [the Dad-a-base](/projects/dad-a-base). This site had to summarise them and link out rather than retell them, let each one's own look come through, and be a sample of the same way of working itself.
+
+- **Stack:** Astro 7 with static output, Tailwind v4, TypeScript, MDX for this page. MySous is React and the Dad-a-base is Vue, so this one deliberately uses neither.
+- **Content:** each Project is one YAML file, checked by a Zod schema. Every Project page comes from one template.
+- **Weight:** 660 bytes of JavaScript, all of it for the theme. Lighthouse on a phone scores 100 for accessibility and SEO.
+- **Process:** a spec, five decision records, and six milestones so far, each a GitHub issue and a pull request with a preview deploy I reviewed before merging.
+
+The code is public on GitHub, at [magicianmike/portfolio](https://github.com/magicianmike/portfolio), with the [spec](https://github.com/magicianmike/portfolio/blob/main/docs/spec.md), the [decision records](https://github.com/magicianmike/portfolio/tree/main/docs/adr) and every pull request.
+
+## Why Astro
+
+<Note>a third way</Note>
+
+Each piece in this portfolio takes a different approach. MySous is Next.js and React; the Dad-a-base is Vue with Apollo. A portfolio is a content site: a handful of pages, a few images, and almost nothing to click that isn't a link. That's what Astro is built for. It renders to plain HTML, and a page ships JavaScript only when it asks for some ([ADR 0001](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0001-astro.md)).
+
+Styling is Tailwind v4, another way to keep a design consistent after the Dad-a-base's plain CSS and three token layers. Tailwind's `@theme` makes the tokens real CSS variables, so the utilities and any hand-written CSS read the same values. The colours live in one file, and dark mode reassigns them ([ADR 0002](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0002-tailwind-v4-tokens.md)).
+
+## Projects as content
+
+<Note>one file each</Note>
+
+Each Project is a YAML file in an Astro content collection: its name, pitch, the Margin note beside it on the home page, the problem, my role, the stack, three Highlights, what's next and its links. A Zod schema checks every file at build time, so a missing field, a misspelt one, or a screenshot without alt text fails the build rather than the page ([ADR 0003](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0003-projects-as-content.md)). Exactly three Highlights are required, so every Project page has the same shape and they're easy to compare.
+
+The links are only to pages that exist. Until this page was written, This site's Case Study link was left out, and its Project page has no "Live site" link because it would only point at this site.
+
+Screenshots come from a script, not by hand. `npm run screenshots` opens each live app in Playwright at desktop or phone size, scrolls to what each Highlight is about, and captures it in light and dark. The page shows the one that matches its theme, and the other is never fetched. When MySous's lime page turned out to carry a "Placeholder image" tag, its Highlight moved to basil; the script made that a one-line change.
+
+## The look
+
+<Note>chosen, not described</Note>
+
+I chose the look from prototypes rather than descriptions. The first round was four home pages, each in light and dark with the real copy and real screenshots:
+
+<Figures
+  images={[
+    {
+      src: variantSwiss,
+      alt: 'The Swiss grid prototype: a strict grid, heavy rules and a cobalt accent.',
+      caption: 'Swiss grid: each Project a row of facts, like a spec sheet.',
+    },
+    {
+      src: variantEditorial,
+      alt: 'The Editorial prototype: a serif display face and a magazine front.',
+      caption: 'Editorial: a magazine front with a lead story.',
+    },
+    {
+      src: variantNotebook,
+      alt: 'The Studio notebook prototype: graph paper, taped-up screenshots and handwritten notes.',
+      caption: 'Studio notebook: the warmest, with notes on what to look at. My pick.',
+    },
+    {
+      src: variantMono,
+      alt: 'The Developer mono prototype: Projects listed like a directory, in monospace.',
+      caption: 'Developer mono: facts as keys and values.',
+    },
+  ]}
+/>
+
+I liked the notebook: its handwriting does a job, telling a reader what to notice in each Project. So the second round was four riffs on it:
+
+<Figures
+  images={[
+    {
+      src: riffMargins,
+      alt: 'The Margins riff: a ruled page with a red margin line and notes in the margin.',
+      caption: 'Margins: the notes in the margin, the Projects one at a time. The winner.',
+    },
+    {
+      src: riffPad,
+      alt: 'The Engineering pad riff: green graph paper with numbered figures.',
+      caption: 'Engineering pad: figures and a red pen ring.',
+    },
+    {
+      src: riffCards,
+      alt: 'The Index cards riff: dot-grid paper and ruled cards in a grid.',
+      caption: 'Index cards: tidy, and the most restrained.',
+    },
+    {
+      src: riffPolaroid,
+      alt: 'The Polaroids riff: screenshots as prints with sticky notes.',
+      caption: 'Polaroids: the most playful.',
+    },
+  ]}
+/>
+
+Margins won. It keeps the handwriting but gives it a place, beside what each note is about, and the Projects run down the page one at a time, so it reads calmly and leaves room for each screenshot. On a phone there's no margin: the red line moves to the edge and each note opens its section instead.
+
+Building it turned up what the prototype hadn't. The margin line ran through my name in the header, so it now starts below it. On a phone the notes first sat under the previous section's rule, so they read as its last line; the rule now goes above each note. The fonts are self-hosted at build time, Latin only, so the site makes no requests to a font service.
+
+## Performance
+
+<Note>660 bytes</Note>
+
+The site's whole JavaScript is two small inline scripts for the theme: one in the head applies a remembered theme before the first paint, so the page never flashes the wrong one, and one runs the toggle. Together they're 660 bytes, 452 gzipped. There are no framework islands ([ADR 0004](https://github.com/magicianmike/portfolio/blob/main/docs/adr/0004-near-zero-js.md)).
+
+Screenshots are the heaviest thing here. `astro:assets` serves each as WebP at the widths the layout needs, and every one but the first on a page loads lazily.
+
+Lighthouse on a phone, against production, before this page was added:
+
+<Scroll label="Lighthouse scores, on a phone">
+
+| Page      | Performance | Accessibility | Best Practices | SEO |
+| --------- | ----------- | ------------- | -------------- | --- |
+| Home      | 100         | 100           | 96             | 100 |
+| A Project | 99          | 100           | 96             | 100 |
+| About     | 100         | 100           | 96             | 100 |
+
+</Scroll>
+
+The 4 points on Best Practices are a missing favicon, which arrives with the next milestone. The home page's first run scored 95 on Performance, with 260ms of blocking time on a page with almost nothing to block; three runs after it scored 100 with 0 to 20ms, so I'm reporting the settled number and saying so.
+
+## Accessibility
+
+<Note>checked, every change</Note>
+
+WCAG 2.2 AA, in both themes, checked on every pull request:
+
+- **axe on every page, in light and dark,** in Chromium and in WebKit on an iPhone, after the fonts have loaded, since they're part of the contrast.
+- **Contrast is tested from the tokens themselves.** A test reads the colour values out of the stylesheet and checks every text colour against every surface, in both themes, so a change of value can't slip past.
+- **The theme toggle** is a button named "Dark theme" that says whether it's pressed. It follows the system until it's used, and without JavaScript it stays hidden and the page simply follows the system.
+- **Links that repeat say whose they are.** Each Project page has a Live site, Case Study and Code link, so their names start with the visible words and then name the Project: "Case Study: MySous". A screen reader's list of links has no two the same, and speech input can still say what it sees.
+- **A skip link** is the first stop on every page, and the navigation marks the page you're on.
+
+One catch came from the tooling, not a rule: Tailwind's reset takes the underline off every link, and milestone 1 shipped footer links that looked like plain text. Links are underlined by default again.
+
+## Building with Claude
+
+<Note>I steer, Claude builds</Note>
+
+I built this with Claude Code. It started with a grilling: Claude asked me questions in rounds until the spec had no open decisions in it, from who the site is for down to the Vercel address. Then each milestone went the same way: an issue, a branch, Claude building to the spec and the rules in [`CLAUDE.md`](https://github.com/magicianmike/portfolio/blob/main/CLAUDE.md), screenshots it looked at and fixed from, a pull request, CI, a preview deploy, and my review before I merged.
+
+The rules say Claude asks before anything outward-facing: every push, issue and pull request. The decisions stayed mine, including some it had to ask about, like leaving my phone number out of the resume. The PDF to download is printed from the same source as the page with that line removed, and a test checks that no page shows a phone number.
+
+## Found on the way
+
+- **Astro backgrounds its preview server when it detects a coding agent,** so Playwright's server "exited early". A flag keeps it in the foreground.
+- **CI spent five minutes installing browsers for seven seconds of tests.** The Playwright jobs now run in Playwright's own container, pinned to the same version, and take under two minutes.
+- **iCloud Drive syncs the folder the repository lives in,** and made duplicate copies of files mid-build. Each was checked against the history before it was removed.
+- **A test raced the lazy images** in WebKit on CI. It now scrolls each into view and waits for it to load.
+
+## What's next
+
+- A Lighthouse budget in CI, so these numbers can't quietly drop.
+- A link preview image for every page, a sitemap, the favicon, and a 404 page.
+- Vercel Web Analytics: cookieless, to learn whether the Case Studies get read. It'll be the site's second script.

@@ -4,8 +4,8 @@ import { expect, test, type Page } from '@playwright/test'
 const projects = [
   { slug: 'my-sous', name: 'MySous', links: ['Live site', 'Case Study', 'Code'] },
   { slug: 'dad-a-base', name: 'The Dad-a-base', links: ['Live site', 'Case Study', 'Code'] },
-  // This site's Case Study arrives in milestone 5, and its live site is this one.
-  { slug: 'this-site', name: 'This site', links: ['Code'] },
+  // This site's live site is the one you're on, so it has no Live link.
+  { slug: 'this-site', name: 'This site', links: ['Case Study', 'Code'] },
 ]
 
 async function loadEveryImage(page: Page) {

@@ -44,8 +44,9 @@ highlights:
       dark: ../../assets/projects/this-site/project-page-dark.jpg
       alt: MySous's Project page on this site, built from the same template as this page.
 next:
-  - An About page, with the resume.
-  - This site's own Case Study.
-  - A Lighthouse budget in CI, and a link preview image for every page.
+  - A Lighthouse budget in CI, so the numbers in the Case Study can't quietly drop.
+  - A link preview image for every page, a sitemap, a favicon and a 404 page.
+  - Cookieless analytics, to learn whether the Case Studies get read.
 links:
+  caseStudy: /case-study
   code: https://github.com/magicianmike/portfolio
