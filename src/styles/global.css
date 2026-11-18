@@ -16,6 +16,18 @@
   --edge: #d9dde2;
   --card: #ffffff;
   --tape: #eee2ad;
+  /* The resume's sheet, after `resume.html`'s zinc greys, with its lightest darkened to pass 4.5:1. */
+  --sheet: #ffffff;
+  --sheet-alt: #fafafa;
+  --sheet-rule: #e4e4e7;
+  --sheet-bar: #18181b;
+  --sheet-ink: #18181b;
+  --sheet-body: #3f3f46;
+  --sheet-muted: #5f5f68;
+  --sheet-faint: #71717a;
+  /* A sheet lifted off the page: a close edge, then a wide, soft drop. */
+  --sheet-shadow:
+    0 1px 2px rgb(24 24 27 / 0.08), 0 6px 12px -2px rgb(24 24 27 / 0.08), 0 28px 56px -16px rgb(24 24 27 / 0.35);
   color-scheme: light;
 }
 
@@ -30,6 +42,16 @@
     --edge: #363c43;
     --card: #22262b;
     --tape: #5e5741;
+    --sheet: #202023;
+    --sheet-alt: #27272a;
+    --sheet-rule: #3a3a40;
+    --sheet-bar: #d4d4d8;
+    --sheet-ink: #fafafa;
+    --sheet-body: #d4d4d8;
+    --sheet-muted: #b4b4bc;
+    --sheet-faint: #a1a1aa;
+    --sheet-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.05), 0 6px 12px -2px rgb(0 0 0 / 0.45), 0 28px 56px -16px rgb(0 0 0 / 0.8);
     color-scheme: dark;
   }
 }
@@ -44,6 +66,16 @@
   --edge: #363c43;
   --card: #22262b;
   --tape: #5e5741;
+  --sheet: #202023;
+  --sheet-alt: #27272a;
+  --sheet-rule: #3a3a40;
+  --sheet-bar: #d4d4d8;
+  --sheet-ink: #fafafa;
+  --sheet-body: #d4d4d8;
+  --sheet-muted: #b4b4bc;
+  --sheet-faint: #a1a1aa;
+  --sheet-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.05), 0 6px 12px -2px rgb(0 0 0 / 0.45), 0 28px 56px -16px rgb(0 0 0 / 0.8);
   color-scheme: dark;
 }
 
@@ -57,6 +89,15 @@
   --color-edge: var(--edge);
   --color-card: var(--card);
   --color-tape: var(--tape);
+  --color-sheet: var(--sheet);
+  --color-sheet-alt: var(--sheet-alt);
+  --color-sheet-rule: var(--sheet-rule);
+  --color-sheet-bar: var(--sheet-bar);
+  --color-sheet-ink: var(--sheet-ink);
+  --color-sheet-body: var(--sheet-body);
+  --color-sheet-muted: var(--sheet-muted);
+  --color-sheet-faint: var(--sheet-faint);
+  --shadow-sheet: var(--sheet-shadow);
 
   --font-display: var(--font-bricolage);
   --font-body: var(--font-plex);

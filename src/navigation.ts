@@ -2,6 +2,7 @@
 export const navigation = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
   { label: 'Case study', href: '/case-study' },
 ] as const
 

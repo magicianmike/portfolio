@@ -15,7 +15,8 @@ Mikel McCormick's portfolio, a small static site that presents his projects to h
 | `/`                | The hero (name, positioning, one sentence), then a Project card each for MySous, the Dad-a-base and This site, in that order |
 | `/projects/<slug>` | A Project page, from one template (below)                                                                                    |
 | `/case-study`      | This site's own Case Study, in MDX                                                                                           |
-| `/about`           | A photo, a short bio, life outside work, the resume as HTML, and a PDF download                                              |
+| `/about`           | A photo, a short bio, life outside work, and links to the resume and its PDF                                                 |
+| `/resume`          | The resume as HTML, laid out as `resume.html` is, and a PDF download                                                         |
 | 404                | A styled not-found page linking home                                                                                         |
 
 Every page has the same header (name, navigation, theme toggle) and footer (contact links, the code, the Case Study).
@@ -53,7 +54,7 @@ Links only, with no form and no backend: email (`mailto:mjmfxmike@gmail.com`), [
 
 ### About and resume
 
-A short bio and the resume as HTML, copied once from the `resume` repo and kept up to date by hand, with its PDF to download.
+A short bio on `/about`, and the resume on `/resume`, in the main navigation. The resume is copied word for word from `resume.html` in the `resume` repo and kept up to date by hand, with its PDF to download. Its page keeps `resume.html`'s layout, on a sheet taped into the notebook, lifted off the page by a shadow: the black bar, the uppercase name, the spaced-out section labels, the striped rows and the three-column footer. It uses the site's fonts, and the sheet has tokens of its own after `resume.html`'s greys, with the lightest darkened to pass 4.5:1, and a dark sheet in the dark theme.
 
 The author's photo, taped into the page beside the bio, and a section on life outside work: the author's family (their wife, Brittany, two dogs, Hank and Oakley, and four cats), woodworking, home renovation, cooking, photography and mixed-media art. The same photo is a small avatar beside the name in every page's header, where it's decorative. The photo's metadata is stripped before it's committed. Brittany's first name and the dogs' names are in by the author's choice, and nothing more about them; no photos but the author's, and nothing that places the author more closely than the town already on the site.
 
@@ -104,3 +105,4 @@ CI must pass before a merge:
 5. **The Case Study.**
 6. **Polish:** the Lighthouse budget in CI, the README, Open Graph images, the sitemap, `robots.txt`, the favicon set, the 404 page, and Vercel Web Analytics.
 7. **Bio and photo:** the photo on About and as the header's avatar, and the Outside work section.
+8. **Resume page:** the resume on `/resume`, laid out as `resume.html` is, and a new photo.
