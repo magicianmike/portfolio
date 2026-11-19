@@ -166,7 +166,6 @@ Once the first seven milestones were in, two more followed, then rounds of desig
 
 - **Astro backgrounds its preview server when it detects a coding agent,** so Playwright's server "exited early". A flag keeps it in the foreground.
 - **CI spent five minutes installing browsers for seven seconds of tests.** The Playwright jobs now run in Playwright's own container, pinned to the same version, and take under two minutes.
-- **iCloud Drive syncs the folder the repository lives in,** and made duplicate copies of files mid-build. Each was checked against the history before it was removed.
 - **A test raced the lazy images** in WebKit on CI. It now scrolls each into view and waits for it to load.
 - **A dev server on the tests' port** made Playwright test it instead of the build, and fail on the sitemap, which only a build makes. The tests now have a port of their own.
 
