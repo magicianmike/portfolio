@@ -10,6 +10,18 @@ import { contact } from '../navigation'
 const section = 'border-divider col-span-full grid grid-cols-subgrid border-t-2 border-dashed md:border-t-0'
 const body = 'border-divider grid gap-5 pt-3 pb-10 md:col-start-2 md:border-t-2 md:border-dashed md:pt-8'
 const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl'
+// The resume at a glance, from the resume itself: where the author works now, and where before.
+const [current, ...earlier] = resume.experience
+const before = earlier.map(({ company }) => company)
+const glance = [
+  {
+    label: 'Experience',
+    text: `18+ years. Now ${current.role} at ${current.company}, building its AI products. Before that, ${before.slice(0, -1).join(', ')} and ${before.at(-1)}.`,
+  },
+  { label: 'Focus', text: 'Frontend architecture, design systems, user experience and AI-driven products.' },
+  { label: 'Stack', text: 'React, Vue, Next.js, Tailwind and Figma.' },
+  { label: 'Education', text: `${resume.education.degree}, ${resume.education.school}.` },
+]
 ---
 
 <Base
@@ -17,9 +29,9 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
   description="About Mikel McCormick, a product-minded frontend engineer with 18 years between design and engineering, and life outside of work."
 >
   <MarginNote arrow>that's me</MarginNote>
-  <header class="grid gap-10 pt-6 pb-12 md:col-start-2 lg:grid-cols-[minmax(0,42rem)_16rem] lg:items-start lg:gap-14">
+  <header class="grid gap-10 pt-6 pb-12 md:col-start-2 lg:grid-cols-[minmax(0,42rem)_18rem] lg:items-start lg:gap-14">
     <div class="grid gap-5">
-      <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">About</h1>
+      <h1 class="m-0 text-5xl leading-none font-extrabold tracking-tight md:text-7xl">About me</h1>
       <p class="m-0 text-lg leading-relaxed">
         I'm a software engineer with 18+ years of experience building web applications, shaping user experiences, and
         improving the systems behind them. My work spans frontend architecture, UX and UI design, design systems, and
@@ -32,7 +44,7 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
       </p>
     </div>
     <!-- Taped into the notebook, like a print: beside the introduction, or above it on a narrow screen, by "that's me". -->
-    <figure class="relative order-first m-0 mt-3 w-48 rotate-2 justify-self-start md:w-64 lg:order-none lg:mt-4 lg:justify-self-end">
+    <figure class="relative order-first m-0 mt-3 w-60 rotate-2 justify-self-center md:w-72 lg:order-none lg:mt-4 lg:justify-self-end">
       <span
         class="bg-tape absolute -top-3 left-1/2 h-7 w-24 -translate-x-1/2 -rotate-3 opacity-80 shadow-sm"
         aria-hidden="true"
@@ -41,9 +53,9 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
         <Image
           src={headshot}
           alt="Mikel McCormick, smiling, with glasses and a beard, in front of a plant and a bookshelf."
-          width={256}
-          widths={[224, 256, 448, 512]}
-          sizes="(min-width: 48rem) 15rem, 11rem"
+          width={288}
+          widths={[240, 288, 480, 576]}
+          sizes="(min-width: 48rem) 17rem, 14rem"
           loading="eager"
           fetchpriority="high"
           class="block h-auto w-full"
@@ -59,18 +71,24 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
         Outside of work
       </h2>
       <p class="m-0 max-w-2xl text-lg leading-relaxed">
-        Most of my life outside of work happens at home, with my wife, Brittany, of five years, Hank, our two-year-old
-        Bernese Mountain Dog, Oakley, a six-month-old golden retriever, and our four cats.
+        Most of my life outside of work happens at home with Brittany, my wife of five years. We have two dogs and four
+        cats. Hank is our two-year-old Bernese Mountain Dog and Oakley is our six-month-old golden retriever.
       </p>
       <p class="m-0 max-w-2xl text-lg leading-relaxed">
-        I like making things with my hands, and furniture is my favorite thing to build. Around the house, I like custom
-        carpentry and built-ins, trim work and electrical best, and some of my favorite projects have been for the
-        animals: a 10-foot sandbox for the dogs and a custom catio for the cats. I'm also a foodie and a passionate home
-        chef, and my favorites to cook are Mexican, Chinese and Japanese.
+        I like making things with my hands, and furniture is my favorite thing to build. Around the house I like custom
+        carpentry and built-ins best, along with trim work and electrical. Some of my favorite projects have been for
+        the animals: a 10-foot sandbox for the dogs and a custom catio for the cats. I'm also a foodie and a passionate
+        home chef. My favorites to cook are Mexican, Chinese and Japanese.
       </p>
       <p class="m-0 max-w-2xl text-lg leading-relaxed">
-        Photography is an art for me, and landscapes are my favorite subject. I also make mixed-media art, combining
-        illustration with pens, markers, watercolor and acrylic, and I dabble in stencil art.
+        Outside, I garden with a focus on sustainable wildlife gardens and food forest design. I plant so the yard gives
+        wildlife food and shelter, and layer trees, shrubs and perennials into something that feeds us too. It goes hand
+        in hand with my interest in homesteading: growing and making more of what we use ourselves.
+      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">
+        Photography is another form of creative expression for me, and landscapes and abstract macro are my favorite
+        subjects. I also make mixed-media art that combines illustration with pens, markers, watercolor and acrylic. I
+        dabble in stencil art too.
       </p>
     </div>
   </section>
@@ -100,18 +118,29 @@ const h2 = 'm-0 text-2xl leading-tight font-extrabold tracking-tight md:text-3xl
       <h2 id="resume" class={h2}>
         Resume
       </h2>
-      <p class="m-0 max-w-2xl text-lg leading-relaxed">
-        {resume.title}: impact, experience, education and skills, on a page of its own.
-      </p>
+      <p class="m-0 max-w-2xl text-lg leading-relaxed">{resume.title}.</p>
+      <dl class="m-0 grid max-w-2xl">
+        {glance.map(({ label, text }) => (
+          <div class="border-edge grid gap-1 border-t py-3 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-4">
+            <dt class="text-text-muted text-sm font-semibold tracking-wider uppercase sm:pt-1">{label}</dt>
+            <dd class="m-0 text-lg leading-relaxed">{text}</dd>
+          </div>
+        ))}
+      </dl>
       <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0">
         <li>
-          <a href="/resume" class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
-            Read the resume
+          <a href="/resume" class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2">
+            <Icon name="document" />
+            See full resume
           </a>
         </li>
         <li>
-          <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
-            Download the resume (PDF, 1 page)
+          <a
+            href={resume.pdf}
+            class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2"
+          >
+            <Icon name="download" />
+            Download as PDF
           </a>
         </li>
       </ul>

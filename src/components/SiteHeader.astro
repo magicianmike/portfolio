@@ -8,7 +8,8 @@ import ThemeToggle from './ThemeToggle.astro'
 const here = (href: string) => (href === Astro.url.pathname.replace(/\/$/, '') ? 'page' : undefined)
 ---
 
-<header class="flex flex-wrap items-center justify-between gap-4 py-6 print:hidden">
+<!-- On a phone the name and theme toggle share the top row and the navigation sits beneath; wider, all three share one. -->
+<header class="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 py-4 sm:grid-cols-[1fr_auto_auto] sm:gap-x-5 sm:py-6 print:hidden">
   <a href="/" class="font-display inline-flex items-center gap-3 text-xl font-extrabold no-underline">
     <!-- Decorative: the name beside it says who it is, and the About page has the photo with its description. -->
     <Image
@@ -24,22 +25,22 @@ const here = (href: string) => (href === Astro.url.pathname.replace(/\/$/, '') ?
     />
     Mikel McCormick
   </a>
-  <div class="flex items-center gap-4 sm:gap-5">
-    <nav aria-label="Main">
-      <ul class="m-0 flex list-none flex-wrap gap-x-4 gap-y-2 p-0 font-medium sm:gap-x-5">
-        {navigation.map(({ label, href }) => (
-          <li>
-            <a
-              href={href}
-              aria-current={here(href)}
-              class="no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-pen aria-[current=page]:decoration-2"
-            >
-              {label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+  <nav aria-label="Main" class="col-span-full row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+    <ul class="m-0 flex list-none flex-wrap gap-x-4 gap-y-2 p-0 font-medium sm:gap-x-5">
+      {navigation.map(({ label, href }) => (
+        <li>
+          <a
+            href={href}
+            aria-current={here(href)}
+            class="no-underline hover:underline aria-[current=page]:underline aria-[current=page]:decoration-pen aria-[current=page]:decoration-2"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <div class="col-start-2 row-start-1 sm:col-start-3">
     <ThemeToggle />
   </div>
 </header>

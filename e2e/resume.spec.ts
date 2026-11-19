@@ -23,7 +23,7 @@ test('the Resume page has the resume, in its sections, and the navigation marks 
 
 test('the resume downloads as a PDF', async ({ page, request }) => {
   await page.goto('/resume')
-  const link = page.getByRole('link', { name: 'Download the resume (PDF, 1 page)' })
+  const link = page.getByRole('link', { name: 'Download as PDF' })
   await expect(link).toHaveAttribute('href', '/mikel-mccormick-resume.pdf')
   const response = await request.get('/mikel-mccormick-resume.pdf')
   expect(response.ok()).toBe(true)

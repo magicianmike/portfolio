@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro'
 import MarginNote from '../components/MarginNote.astro'
 import { emphasis, resume } from '../data/resume'
 import Base from '../layouts/Base.astro'
@@ -17,8 +18,9 @@ const small = 'text-[11px] font-semibold uppercase tracking-[0.2em] text-sheet-f
   <MarginNote arrow>the resume</MarginNote>
   <div class="grid gap-6 pt-6 pb-12 md:col-start-2 print:block print:p-0">
     <p class="m-0 flex max-w-[850px] justify-end print:hidden">
-      <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center font-semibold decoration-2">
-        Download the resume (PDF, 1 page)
+      <a href={resume.pdf} class="decoration-pen inline-flex min-h-11 items-center gap-2 font-semibold decoration-2">
+        <Icon name="download" />
+        Download as PDF
       </a>
     </p>
 
