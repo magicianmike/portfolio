@@ -17,7 +17,7 @@ I had two projects that each already have a long Case Study inside the app: [MyS
 - **Stack:** Astro 7 with static output, Tailwind v4, TypeScript, MDX for this page. MySous is React and the Dad-a-base is Vue, so this one deliberately uses neither.
 - **Content:** each Project is one YAML file, checked by a Zod schema. Every Project page comes from one template.
 - **Weight:** about 1 KB of the site's own JavaScript, for the theme and the glide to Work, plus Vercel's analytics. On a phone, Lighthouse scores 100 for accessibility, best practices and SEO on every page, and CI fails a pull request that drops any of them.
-- **Process:** a spec, five decision records, and nine milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging, then a round of design changes.
+- **Process:** a spec, five decision records, and nine milestones, each a GitHub issue and a pull request with a preview deploy I reviewed before merging, then rounds of design changes and a pass at phone width.
 
 The code is public on GitHub, at [magicianmike/portfolio](https://github.com/magicianmike/portfolio), with the [spec](https://github.com/magicianmike/portfolio/blob/main/docs/spec.md), the [decision records](https://github.com/magicianmike/portfolio/tree/main/docs/adr) and every pull request.
 
@@ -151,15 +151,16 @@ The rules say Claude asks before anything outward-facing: every push, issue and 
 
 ## After launch
 
-<Note>two more, and a round</Note>
+<Note>two more, then polish</Note>
 
-Once the first seven milestones were in, two more followed, then a round of design changes.
+Once the first seven milestones were in, two more followed, then rounds of design changes and a pass at phone width.
 
-- **About** gained a photo, taped into the page like a print, and a section on life outside of work. The same photo is the small avatar beside my name in every header. Its metadata is stripped before it's committed.
+- **About** gained a photo, taped into the page like a print, and a section on life outside of work. The same photo is the small avatar beside my name in every header. Its metadata is stripped before it's committed. Its Resume section is a short summary, drawn from the resume's own data, with links to the full page and the PDF.
 - **The resume got [a page of its own](/resume),** word for word from the HTML resume I keep elsewhere, and in its layout: the black bar, the spaced-out labels, the striped rows. It's in this site's fonts, on a sheet taped into the notebook, with colour tokens of its own. The original's lightest grey fails 4.5:1, so here it's a shade darker. The PDF to download is printed from that page, whose print styles leave only the sheet, so the two can't drift apart.
-- **The Project cards** link straight to each Project's Case Study, live site and code, each with an icon.
+- **The Project cards** link straight to each Project's Case Study, live site and code, each with an icon, and a card's screenshot opens its live site in a new tab.
 - **The theme toggle** borrows the Dad-a-base's switch: both the sun and the moon show, and a thumb slides behind the one in use. Its script didn't change.
 - **Work** in the navigation glides down to the Projects, from the home page or any other: from another page, home opens at the top and then scrolls. With less motion asked for, it jumps.
+- **On a phone,** the Projects ran together: a rule, a note, a screenshot, a name, tags and links, all at one spacing. Like the look, the fix was chosen from four variants built from the real content: an index card, a spec sheet, a taped card and a compact list with thumbnails. The taped card won. Each Project is now a card with its Margin note taped across the top, its name above the screenshot, and its links a row of buttons. The hero is smaller, so the first card shows above the fold, and the theme toggle sits beside my name. Wider screens are unchanged.
 
 ## Found on the way
 

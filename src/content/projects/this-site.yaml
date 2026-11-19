@@ -30,11 +30,14 @@ highlights:
   - heading: Notes that move to fit
     body: >-
       On a wide screen each Margin note sits in the margin beside what it's about. On a phone the margin goes, the red
-      line moves to the edge, and each note opens its section instead.
+      line moves to the edge, and each note opens its section instead. On the home page, each Project's note is taped
+      across the top of its card.
     shot:
       light: ../../assets/projects/this-site/notes-phone-light.jpg
       dark: ../../assets/projects/this-site/notes-phone-dark.jpg
-      alt: The home page on a phone, with each Margin note above what it's about.
+      alt: >-
+        The home page on a phone: "hi, I'm Mikel" above the headline, and MySous's card with its note taped across the
+        top.
   - heading: Projects as content
     body: >-
       Each Project is one YAML file checked by a Zod schema, so a missing field or a screenshot without alt text fails
