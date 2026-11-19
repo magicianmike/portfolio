@@ -4,14 +4,14 @@ import { expect, test } from '@playwright/test'
 test('the About page has a bio, the resume and contact, and the navigation marks it', async ({ page }) => {
   await page.goto('/about')
   await expect(page).toHaveTitle('About · Mikel McCormick')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('About')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('About me')
   await expect(page.getByRole('heading', { level: 2 })).toHaveText([
     'Outside of work',
     'How I work',
     'Resume',
     'Contact',
   ])
-  await expect(page.getByRole('link', { name: 'Read the resume' })).toHaveAttribute('href', '/resume')
+  await expect(page.getByRole('link', { name: 'See full resume' })).toHaveAttribute('href', '/resume')
   await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' })).toHaveAttribute(
     'aria-current',
     'page',

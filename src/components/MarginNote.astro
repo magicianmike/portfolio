@@ -6,12 +6,20 @@
 interface Props {
   /** An arrow pointing at the block beside it, on a wide screen. */
   arrow?: boolean
+  /** On a narrow screen, a label taped across the top of the card that follows, instead of a note above it. */
+  taped?: boolean
 }
 
-const { arrow = false } = Astro.props
+const { arrow = false, taped = false } = Astro.props
 ---
 
-<p class="font-hand text-pen col-start-1 m-0 pt-2 text-xl leading-tight font-bold md:col-start-1 md:-rotate-3 md:pt-1 md:text-right print:hidden">
+<p
+  class:list={[
+    'font-hand text-pen col-start-1 m-0 pt-2 text-xl leading-tight font-bold md:col-start-1 md:-rotate-3 md:pt-1 md:text-right print:hidden',
+    taped &&
+      'max-md:bg-tape max-md:text-text relative z-10 max-md:-mb-4 max-md:ml-4 max-md:-rotate-2 max-md:justify-self-start max-md:px-3 max-md:py-0.5 max-md:text-lg max-md:shadow-sm',
+  ]}
+>
   <slot />
   {arrow && (
     <span class="hidden md:block" aria-hidden="true">
